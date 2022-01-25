@@ -7,12 +7,21 @@
 //
 
 import UIKit
+import HandyJSON
+import LYNetworkService
+
+struct TestModel:HandyJSON  {
+    
+}
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        NetworkService.requestDataModel(PublicAPI.testRequest(id: "1043920957"), model: TestModel.self) { responseModel in
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {

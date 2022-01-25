@@ -1,0 +1,39 @@
+PODS:
+  - Alamofire (5.4.4)
+  - FBSnapshotTestCase (2.1.4):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
+  - FBSnapshotTestCase/Core (2.1.4)
+  - FBSnapshotTestCase/SwiftSupport (2.1.4):
+    - FBSnapshotTestCase/Core
+  - HandyJSON (5.0.2)
+  - LYNetworkService (0.1.0):
+    - Alamofire
+    - HandyJSON
+    - SwiftyJSON
+  - SwiftyJSON (5.0.1)
+
+DEPENDENCIES:
+  - FBSnapshotTestCase (~> 2.1.4)
+  - LYNetworkService (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - FBSnapshotTestCase
+    - HandyJSON
+    - SwiftyJSON
+
+EXTERNAL SOURCES:
+  LYNetworkService:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
+  FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
+  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
+  LYNetworkService: 96e05957045c0a1d202d1d11877108b9bcbeecf2
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
+
+PODFILE CHECKSUM: 7812c070f2e937b9d4316872a4dd053e6667cb40
+
+COCOAPODS: 1.11.2

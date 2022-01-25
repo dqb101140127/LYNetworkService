@@ -21,14 +21,14 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/董强彬/LYNetworkService'
+  s.homepage         = 'https://gitee.com/dongluoyi/LYNetworkService'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { '董强彬' => 'dongqiangbin@foxmail.com' }
-  s.source           = { :git => 'https://github.com/董强彬/LYNetworkService.git', :tag => s.version.to_s }
+  s.author           = { 'lorry' => 'dongqiangbin@foxmail.com' }
+  s.source           = { :git => 'https://gitee.com/dongluoyi/LYNetworkService.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '10.0'
 
   s.source_files = 'LYNetworkService/Classes/**/*'
   
@@ -36,7 +36,10 @@ TODO: Add long description of the pod here.
   #   'LYNetworkService' => ['LYNetworkService/Assets/*.png']
   # }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+   s.public_header_files = 'Pod/Classes/**/*.h'
+   s.frameworks = 'UIKit', 'Foundation'
+   s.dependency 'Alamofire'
+   s.dependency 'SwiftyJSON'
+   s.dependency 'HandyJSON'
+
 end

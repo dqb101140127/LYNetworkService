@@ -1,5 +1,4 @@
 import XCTest
-import LYNetworkService
 
 class Tests: XCTestCase {
     
