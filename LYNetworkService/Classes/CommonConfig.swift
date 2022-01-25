@@ -27,14 +27,14 @@ func LYLog(_ log: Any?..., fileName: String = #file, methodName: String =   #fun
 
 func compressImageData(image:UIImage,maxLength: Int) -> Data? {
         var compression: CGFloat = 1
-        guard var data = UIImageJPEGRepresentation(image, compression),
-        data.count > maxLength else { return UIImageJPEGRepresentation(image, compression) }
+    guard var data = image.jpegData(compressionQuality: compression),
+          data.count > maxLength else { return image.jpegData(compressionQuality: compression) }
         // Compress by size
         var max: CGFloat = 1
         var min: CGFloat = 0
         for _ in 0..<6 {
             compression = (max + min) / 2
-            data = UIImageJPEGRepresentation(image, compression)!
+            data = image.jpegData(compressionQuality: compression)!
             if CGFloat(data.count) < CGFloat(maxLength) * 0.9 {
                 min = compression
             } else if data.count > maxLength {
@@ -58,7 +58,7 @@ func compressImageData(image:UIImage,maxLength: Int) -> Data? {
             resultImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
             resultImage = UIGraphicsGetImageFromCurrentImageContext()!
             UIGraphicsEndImageContext()
-            data = UIImageJPEGRepresentation(resultImage, compression)!
+            data = resultImage.jpegData(compressionQuality: compression)!
         }
         return nil
 }

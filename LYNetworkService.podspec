@@ -32,12 +32,11 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'LYNetworkService/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'LYNetworkService' => ['LYNetworkService/Assets/*.png']
-  # }
+   s.resource_bundles = {
+     'LYNetworkService' => ['LYNetworkService/Assets/*.png']
+   }
 
    s.public_header_files = 'Pod/Classes/**/*.h'
-   s.frameworks = 'UIKit', 'Foundation'
    s.dependency 'Alamofire'
    s.dependency 'SwiftyJSON'
    s.dependency 'HandyJSON'
