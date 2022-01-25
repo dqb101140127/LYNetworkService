@@ -10,4 +10,10 @@ target 'LYNetworkService_Example' do
 
     pod 'FBSnapshotTestCase' , '~> 2.1.4'
   end
+  target 'Extension' do
+     inherit! :search_paths
+     pod 'Alamofire'
+     pod 'SwiftyJSON'
+     pod 'HandyJSON'
+   end
 end
