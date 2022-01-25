@@ -128,32 +128,21 @@ public class BaseNetworkService: NSObject {
         if !allowDuplicateRequest {
             dataRequests.updateValue(request, forKey: urlString);
         }
-#if DEBUG
-            if enableLog {
-                let para = JSON(parameters ?? "");
-                LYLog("=请求地址===\(urlString)==请求参数=",para);
-            }
-#else
-
-#endif
+        if enableLog {
+            let para = JSON(parameters ?? "");
+            LYLog("=请求地址===\(urlString)==请求参数=",para);
+        }
         request.responseData(queue: DispatchQueue.main) { (response) in
-#if DEBUG
-            if enableLog {
-                if let data = response.data {
-                    let json = try? JSON.init(data: data, options: .fragmentsAllowed);
-                    LYLog("=请求地址===\(urlString)==数据返回=",json);
-                }
+            if enableLog,let data = response.data {
+                let json = try? JSON.init(data: data, options: .fragmentsAllowed);
+                LYLog("=请求地址===\(urlString)==数据返回=",json);
             }
-#else
-
-#endif
             switch response.result {
             case .success(let data):
                 result(data);
             case .failure(let error):
                 fail(error.errorMsg,error);
                 break;
-               
             }
             dataRequests.removeValue(forKey: urlString);
         }

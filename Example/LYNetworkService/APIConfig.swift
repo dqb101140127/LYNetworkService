@@ -7,11 +7,11 @@
 //
 #if DEBUG
 
-let BASE_URL = ""
+let BASE_URL = "https://itunes.apple.com/cn/lookup"
 
 
 #else
 
-let BASE_URL = ""
+let BASE_URL = "https://itunes.apple.com/cn/lookup"
 
 #endif
