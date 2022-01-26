@@ -14,16 +14,17 @@ public class LYResponseModel<T:HandyJSON> :HandyJSON {
     var errorCode : String?
     var errorMessage : String?
     var error:LYError?
-    var data : Data?;
+    var data : Data?;//原始数据
     public var model : T?;
     public var models:[T]?;
     
   public func mapping(mapper: HelpingMapper) {
-        mapper >>> model
-        mapper >>> models
-        mapper >>> data
+      mapper >>> model
+      mapper >>> models
+      mapper >>> data
     }
-   public required init() {}   
+   public required init() {
+   }
     class func makeErrorResponseModel(errorMessage:String?,error:LYError?) -> LYResponseModel<T> {
         let responseModel = LYResponseModel<T>();
         responseModel.result = false;

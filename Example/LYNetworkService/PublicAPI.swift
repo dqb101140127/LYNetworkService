@@ -9,12 +9,31 @@
 import UIKit
 import LYNetworkService
 
+extension NetworkServiceTarget {
+    var resultKey: String {
+        return "result"
+    }
+    var errorMessageKey: String {
+        return "errorMessage";
+    }
+    var errorCodeKey: String {
+        return "errorCode"
+    }
+    var bodyKey: String {
+        return "bodyKey";
+    }
+}
+
 enum PublicAPI {
     case testRequest(id:String);
 
 }
 
 extension PublicAPI:NetworkServiceTarget {
+
+    
+
+    
     var baseURL: String {
         switch self {
         case .testRequest(_):

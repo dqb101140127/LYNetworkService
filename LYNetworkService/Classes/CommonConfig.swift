@@ -3,6 +3,11 @@
 import UIKit
 import Foundation
 import SwiftyJSON
+import HandyJSON
+
+extension String:HandyJSON{}
+extension NSNumber:HandyJSON {}
+extension Bool:HandyJSON {}
 
 //let currentScreenHeight = UIScreen.main.bounds.height
 ///// 屏幕高度

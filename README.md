@@ -18,12 +18,12 @@ LYNetworkService is available through [CocoaPods](https://cocoapods.org). To ins
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'LYNetworkService'
+pod 'LYNetworkService', :git => 'https://gitee.com/dongluoyi/LYNetworkService.git'
 ```
 
 ## Author
 
-董强彬, dongqiangbin@foxmail.com
+Lorry, dongqiangbin@foxmail.com
 
 ## License
 
