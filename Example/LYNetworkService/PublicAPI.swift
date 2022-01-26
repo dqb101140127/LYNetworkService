@@ -13,27 +13,27 @@ extension NetworkServiceTarget {
     var resultKey: String {
         return "result"
     }
+    var statusKey: String {
+        return "status";
+    }
     var errorMessageKey: String {
-        return "errorMessage";
+        return "message";
     }
     var errorCodeKey: String {
         return "errorCode"
     }
     var bodyKey: String {
-        return "bodyKey";
+        return "data";
     }
 }
 
 enum PublicAPI {
-    case testRequest(id:String);
+    case testRequest(code:String);
 
 }
 
 extension PublicAPI:NetworkServiceTarget {
-
-    
-
-    
+  
     var baseURL: String {
         switch self {
         case .testRequest(_):
@@ -44,13 +44,13 @@ extension PublicAPI:NetworkServiceTarget {
     var path: String {
         switch self {
         case .testRequest(_):
-            return "";
+            return "/dtww/index/selectUpp";
         }
     }
     func parameters() -> [String : Any]? {
         switch self {
-        case .testRequest(let id):
-            return ["id":id];
+        case .testRequest(let code):
+            return ["cityCode":code];
         }
     }
     

@@ -16,6 +16,7 @@ import Alamofire
 
 public protocol NetworkServiceTarget:BaseNetworkServiceTarget {
     var resultKey:String{get}
+    var statusKey:String{get}
     var errorMessageKey:String{get}
     var errorCodeKey:String{get}
     var bodyKey:String{get}
@@ -37,6 +38,7 @@ public class NetworkService:BaseNetworkService {
            let responseModel = LYResponseModel<M>.deserialize(from: json?.dictionaryObject);
            responseModel?.data = data;
            responseModel?.result  = json?[target.resultKey].boolValue ?? false;
+           responseModel?.status  = json?[target.statusKey].intValue ?? 0;
            responseModel?.errorCode = json?[target.errorCodeKey].stringValue;
            responseModel?.errorMessage = json?[target.errorMessageKey].stringValue;
            if let jsonData = json?[target.bodyKey] {

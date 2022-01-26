@@ -14,21 +14,14 @@ struct TestModel:HandyJSON  {
     
 }
 
-class CustomResponseModel<M:HandyJSON>:HandyJSON {
-    
-    required init() {
-        
-    }
-}
-
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NetworkService.requestDataModel(PublicAPI.testRequest(id: "1043920957"), model: String.self) { responseModel in
+        NetworkService.requestDataModel(PublicAPI.testRequest(code: "021"), model: TestModel.self) { responseModel in
             
-            print(responseModel.models);
+            print(responseModel);
             
         }
         

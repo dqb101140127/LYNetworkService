@@ -11,6 +11,7 @@ import HandyJSON
 
 public class LYResponseModel<T:HandyJSON> :HandyJSON {
     var result : Bool = false;
+    var status:Int = 0;
     var errorCode : String?
     var errorMessage : String?
     var error:LYError?
