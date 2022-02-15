@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0C75F89C279F9F1900AF3F31 /* PublicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C75F89B279F9F1900AF3F31 /* PublicAPI.swift */; };
 		0C75F89E279FA2CE00AF3F31 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C75F89D279FA2CE00AF3F31 /* APIConfig.swift */; };
+		0C789C2F27BB724E00542C86 /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C789C2E27BB724E00542C86 /* TestModel.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		0C75F89B279F9F1900AF3F31 /* PublicAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicAPI.swift; sourceTree = "<group>"; };
 		0C75F89D279FA2CE00AF3F31 /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
+		0C789C2E27BB724E00542C86 /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		4A87B63D39137813FAE0E9F7 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		4AB82E359F13432A7413BF9A /* Pods-LYNetworkService_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LYNetworkService_Example.release.xcconfig"; path = "Target Support Files/Pods-LYNetworkService_Example/Pods-LYNetworkService_Example.release.xcconfig"; sourceTree = "<group>"; };
 		5AA7DD60A93429E70D123909 /* Pods-LYNetworkService_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LYNetworkService_Tests.release.xcconfig"; path = "Target Support Files/Pods-LYNetworkService_Tests/Pods-LYNetworkService_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -119,6 +121,7 @@
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				0C789C2E27BB724E00542C86 /* TestModel.swift */,
 				0C75F89B279F9F1900AF3F31 /* PublicAPI.swift */,
 				0C75F89D279FA2CE00AF3F31 /* APIConfig.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -364,6 +367,7 @@
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				0C75F89C279F9F1900AF3F31 /* PublicAPI.swift in Sources */,
+				0C789C2F27BB724E00542C86 /* TestModel.swift in Sources */,
 				0C75F89E279FA2CE00AF3F31 /* APIConfig.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);

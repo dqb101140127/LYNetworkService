@@ -7,12 +7,7 @@
 //
 
 import UIKit
-import HandyJSON
 import LYNetworkService
-
-struct TestModel:HandyJSON  {
-    
-}
 
 class ViewController: UIViewController {
 

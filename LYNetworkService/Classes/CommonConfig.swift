@@ -1,13 +1,20 @@
 
-
-import UIKit
-import Foundation
-import SwiftyJSON
 import HandyJSON
-
+public protocol ModelJSON:HandyJSON{
+    mutating func copyModel() -> Self;
+}
 extension String:HandyJSON{}
 extension NSNumber:HandyJSON {}
 extension Bool:HandyJSON {}
+
+
+extension ModelJSON {
+    public mutating func copyModel() -> Self {
+        let json = self.toJSON();
+        let model = Self.deserialize(from: json) ?? Self.init();
+        return model;
+    }
+}
 
 //let currentScreenHeight = UIScreen.main.bounds.height
 ///// 屏幕高度

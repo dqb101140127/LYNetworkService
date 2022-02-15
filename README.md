@@ -37,21 +37,27 @@ struct TestModel:HandyJSON  {
 
 #### 返回字段配置
 extension NetworkServiceTarget {
+
     var resultKey: String {
         return "result"
     }
+    
     var statusKey: String {
         return "status";
     }
+    
     var errorMessageKey: String {
         return "message";
     }
+    
     var errorCodeKey: String {
         return "errorCode"
     }
+    
     var bodyKey: String {
         return "data";
     }
+    
 }
 
 #### 接口定义

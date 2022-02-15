@@ -22,11 +22,8 @@ public protocol NetworkServiceTarget:BaseNetworkServiceTarget {
     var bodyKey:String{get}
 }
 
-
-
 public class NetworkService:BaseNetworkService {
     
-
     //MARK 返回指定的响应模型
    public class func requestDataModel<T:NetworkServiceTarget,M:HandyJSON>( _ target:T,
                                                                               model:M.Type,

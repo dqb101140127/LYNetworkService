@@ -8,8 +8,7 @@
 
 import UIKit
 import HandyJSON
-
-public class LYResponseModel<T:HandyJSON> :HandyJSON {
+public class LYResponseModel<T:ModelJSON> :ModelJSON {
     var result : Bool = false;
     var status:Int = 0;
     var errorCode : String?
@@ -24,8 +23,7 @@ public class LYResponseModel<T:HandyJSON> :HandyJSON {
       mapper >>> models
       mapper >>> data
     }
-   public required init() {
-   }
+   public required init() {}
     class func makeErrorResponseModel(errorMessage:String?,error:LYError?) -> LYResponseModel<T> {
         let responseModel = LYResponseModel<T>();
         responseModel.result = false;
@@ -33,30 +31,4 @@ public class LYResponseModel<T:HandyJSON> :HandyJSON {
         responseModel.error = error;
         return responseModel;
     }
-}
-
-
-class BaseResponseModel:HandyJSON {
-    
-    required init() {}
-}
-
-
-class MyResponseModel: BaseResponseModel {
-    var result : Bool = false;
-    var errorCode : String?
-    var errorMessage : String?
-    var error:LYError?
-    var data : Data?;
-    required init() {}
-
-}
-
-
-class MYModel: MyResponseModel {
-    var model:Any?;
-    
-    
-    required init() {}
-
 }
