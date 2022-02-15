@@ -30,9 +30,12 @@ Lorry, dongqiangbin@foxmail.com
 LYNetworkService is available under the MIT license. See the LICENSE file for more info.
 =======
 #### 使用说明
+#### 测试模型  
 struct TestModel:HandyJSON  {
     
 }
+
+#### 返回字段配置
 extension NetworkServiceTarget {
     var resultKey: String {
         return "result"
@@ -51,11 +54,13 @@ extension NetworkServiceTarget {
     }
 }
 
+#### 接口定义
 enum PublicAPI {
     case testRequest(code:String);
 
 }
 
+#### 接口配置
 extension PublicAPI:NetworkServiceTarget {
   
     var baseURL: String {
@@ -84,11 +89,12 @@ extension PublicAPI:NetworkServiceTarget {
             return .get
         }
     }
-      
+}
+
+#### 调用 
+NetworkService.requestDataModel(PublicAPI.testRequest(code: "021"), model: TestModel.self) { responseModel in
+    
+    print(responseModel);
     
 }
-    NetworkService.requestDataModel(PublicAPI.testRequest(code: "021"), model: TestModel.self) { responseModel in
-        
-        print(responseModel);
-        
-    }
+
