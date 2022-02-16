@@ -9,12 +9,12 @@
 import UIKit
 import HandyJSON
 public class LYResponseModel<T:ModelJSON> :ModelJSON {
-    var result : Bool = false;
-    var status:Int = 0;
-    var errorCode : String?
-    var errorMessage : String?
-    var error:LYError?
-    var data : Data?;//原始数据
+    public var result : Bool = false;
+    public var status:Int = 0;
+    public var errorCode : String?
+    public var errorMessage : String?
+    public var error:LYError?
+    public var data : Data?;//原始数据
     public var model : T?;
     public var models:[T]?;
     

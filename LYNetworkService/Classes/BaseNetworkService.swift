@@ -216,7 +216,11 @@ public class BaseNetworkService: NSObject {
     private class func makeHttpHeaders() -> HTTPHeaders {
         var headers = HTTPHeaders.default;
         for (key,value) in userHeaders {
-            headers.add(name: key, value: value);
+            if headers.value(for: key) == nil {
+                headers.add(name: key, value: value);
+            }else{
+                headers.update(name: key, value: value);
+            }
         }
         return headers;
     }
