@@ -108,7 +108,11 @@ public class BaseNetworkService: NSObject {
         var headers = makeHttpHeaders();
         if let customHeader = target.headers(path: path) {
             for (key,value) in customHeader {
-                headers.add(name: key, value: value);
+                if headers.value(for: key) == nil {
+                    headers.add(name: key, value: value);
+                }else{
+                    headers.update(name: key, value: value);
+                }
             }
         }
         if let _ = dataRequests[urlString], !allowDuplicateRequest {
