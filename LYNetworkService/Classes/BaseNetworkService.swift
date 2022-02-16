@@ -35,6 +35,7 @@ public protocol BaseNetworkServiceTarget {
     func enableLog(path:String) -> Bool;
     func method(path:String) -> HTTPMethod;
     func headers(path:String) -> [String:String]?;
+    func cookies(url:URL) -> [HTTPCookie]?;
     func didReceiveData(error:LYError?,data:Data);
 }
 public extension BaseNetworkServiceTarget {
@@ -59,7 +60,9 @@ public extension BaseNetworkServiceTarget {
     func didReceiveData(error:LYError?,data:Data) {
         LYLog("didReceiveData-方法未实现")
     }
-    
+    func cookies(url:URL) -> [HTTPCookie]? {
+        return nil;
+    }
     func parameterEncoding(path:String) -> ParameterEncoding {
         let md = method(path: path);
         if md == .get {
@@ -82,14 +85,7 @@ public class BaseNetworkService: NSObject {
         return manager
     }()
 
-    class func ly_setCookie(url:URL? = nil) {
-    //    let domain = url?.host ?? "api.dianmei.com";
-    //    if let access_token_cookie = createCookie(name: "access_token", value:"access_token" ,domain: domain){
-    //        HTTPCookieStorage.shared.setCookie(access_token_cookie);
-    //    }
-    }
-
-    private func createCookie(name:String,value:String,domain:String) -> HTTPCookie? {
+    public class func createCookie(name:String,value:String,domain:String) -> HTTPCookie? {
         var propertys = [HTTPCookiePropertyKey :Any]();
         propertys[.name] = name;
         propertys[.value] = value;
@@ -119,7 +115,11 @@ public class BaseNetworkService: NSObject {
             fail("努力加载中...",nil);
             return;
         }
-        ly_setCookie(url: url);
+        if let cookies = target.cookies(url: url) {
+            for cookie in cookies {
+                HTTPCookieStorage.shared.setCookie(cookie);
+            }
+        }
         let enableLog = target.enableLog(path: path);
         let method = target.method(path: path);
         let encoding = target.parameterEncoding(path: path);
