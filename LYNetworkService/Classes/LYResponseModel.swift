@@ -8,7 +8,7 @@
 
 import UIKit
 import HandyJSON
-public class LYResponseModel<T:ModelJSON> :ModelJSON {
+public class LYResponseModel<T:HandyJSON> :HandyJSON {
     public var result : Bool = false;
     public var status:Int = 0;
     public var errorCode : String?
