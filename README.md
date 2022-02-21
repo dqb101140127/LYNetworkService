@@ -98,9 +98,17 @@ extension PublicAPI:NetworkServiceTarget {
 }
 
 #### 调用 
-NetworkService.requestDataModel(PublicAPI.testRequest(code: "021"), model: TestModel.self) { responseModel in
-    
-    print(responseModel);
-    
-}
+####第一种使用方式
+    func testRequest1() {
+        NetworkService.requestDataModel(PublicAPI.testRequest(code: "021"), model: TestModel.self) { responseModel in
+            print(responseModel);
+        }
+    }
+
+####第二种使用方式
+    func testRequest2() {
+        PublicAPI.testRequest(code: "021").result(model: TestModel.self) { responseModel in
+            print(responseModel);
+        }
+    }
 

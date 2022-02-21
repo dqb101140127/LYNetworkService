@@ -1,5 +1,29 @@
 
 import HandyJSON
+public protocol LYCompatible {}
+public struct LY<Base> {
+    public var base:Base;
+    init(_ base: Base) {
+        self.base = base;
+    }
+}
+extension LYCompatible {
+    public var ly: LY<Self> {
+        get {
+            LY(self)
+        }
+        set{
+        }
+    }
+    public static var ly: LY<Self>.Type {
+        get{
+            LY<Self>.self
+        }
+        set{}
+    }
+}
+
+
 public protocol ModelJSON:HandyJSON{
     mutating func copyModel() -> Self;
 }

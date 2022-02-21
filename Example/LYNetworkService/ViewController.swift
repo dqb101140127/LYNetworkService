@@ -13,14 +13,20 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NetworkService.requestDataModel(PublicAPI.testRequest(code: "021"), model: TestModel.self) { responseModel in
-            
-            print(responseModel);
-            
-        }
-        
+//        testRequest1();
+        testRequest2();
+    }
     
+    func testRequest1() {
+        NetworkService.requestDataModel(PublicAPI.testRequest(code: "021"), model: TestModel.self) { responseModel in
+            print(responseModel);
+        }
+    }
+    
+    func testRequest2() {
+        PublicAPI.testRequest(code: "021").result(model: TestModel.self) { responseModel in
+            print(responseModel.model?.headLine);
+        }
     }
 
     override func didReceiveMemoryWarning() {

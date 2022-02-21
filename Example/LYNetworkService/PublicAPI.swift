@@ -11,7 +11,7 @@ import LYNetworkService
 
 extension NetworkServiceTarget {
     var resultKey: String {
-        return "result"
+        return "status"
     }
     var statusKey: String {
         return "status";

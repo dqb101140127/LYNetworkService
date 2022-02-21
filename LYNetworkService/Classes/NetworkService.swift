@@ -12,16 +12,6 @@ import SwiftyJSON
 import Alamofire
 
 
-
-
-public protocol NetworkServiceTarget:BaseNetworkServiceTarget {
-    var resultKey:String{get}
-    var statusKey:String{get}
-    var errorMessageKey:String{get}
-    var errorCodeKey:String{get}
-    var bodyKey:String{get}
-}
-
 public class NetworkService:BaseNetworkService {
     
     //MARK 返回指定的响应模型
@@ -61,6 +51,7 @@ public class NetworkService:BaseNetworkService {
        })
     }
     
+    
     //MARK 返回自定义数据模型
    public class func requestCustomDataModel<T:BaseNetworkServiceTarget,M:HandyJSON>( _ target:T,
                                                                                     model:M.Type,
@@ -75,7 +66,7 @@ public class NetworkService:BaseNetworkService {
        })
     }
 
-    class private func dataConvertToJson(data:Data,fail:FailureClosure?) -> (JSON?,String?) {
+    class func dataConvertToJson(data:Data,fail:FailureClosure?) -> (JSON?,String?) {
         do {
             let json = try JSON.init(data: data, options: .fragmentsAllowed);
             return (json,nil);
