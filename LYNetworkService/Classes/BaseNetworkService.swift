@@ -103,10 +103,44 @@ public class BaseNetworkService: NSObject {
         let urlString = target.baseURL + path;
         guard let url : URL = URL.init(string: urlString) else {return}
         let allowDuplicateRequest = target.allowDuplicateRequest(path: path);
+        let customHeader = target.headers(path: path)
+        let cookies = target.cookies(url: url)
+        let enableLog = target.enableLog(path: path);
+        let method = target.method(path: path);
+        let encoding = target.parameterEncoding(path: path);
+        let parameters = target.parameters();
+        request(urlString: urlString, parameters: parameters, method: method, header: customHeader, encoding: encoding, cookies: cookies, enableLog: enableLog, allowDuplicateRequest: allowDuplicateRequest, result: result, fail: fail);
+    }
 
-        
+    public class func request(urlString:String,
+                             parameters:[String:Any]?,
+                                 method:HTTPMethod = .post,
+                                 header:[String:String]? = nil,
+                               encoding:ParameterEncoding? = nil,
+                                cookies:[HTTPCookie]? = nil,
+                           jsonEncoding:Bool = true,
+                              enableLog:Bool = true,
+                  allowDuplicateRequest:Bool = false,
+                                 result:@escaping SuccessClosure,
+                                   fail:@escaping FailureClosure) {
+        guard let url : URL = URL.init(string: urlString) else {return};
+        if let _ = dataRequests[urlString], !allowDuplicateRequest {
+            fail("努力加载中...",nil);
+            return;
+        }
+        var _encoding :ParameterEncoding;
+        if let encoding = encoding {
+            _encoding = encoding;
+        }else{
+            if method == .get {
+                _encoding = URLEncoding.default
+            }else{
+                _encoding = jsonEncoding ? JSONEncoding.default : URLEncoding.httpBody;
+            }
+        }
+
         var headers = makeHttpHeaders();
-        if let customHeader = target.headers(path: path) {
+        if let customHeader = header {
             for (key,value) in customHeader {
                 if headers.value(for: key) == nil {
                     headers.add(name: key, value: value);
@@ -115,20 +149,8 @@ public class BaseNetworkService: NSObject {
                 }
             }
         }
-        if let _ = dataRequests[urlString], !allowDuplicateRequest {
-            fail("努力加载中...",nil);
-            return;
-        }
-        if let cookies = target.cookies(url: url) {
-            for cookie in cookies {
-                HTTPCookieStorage.shared.setCookie(cookie);
-            }
-        }
-        let enableLog = target.enableLog(path: path);
-        let method = target.method(path: path);
-        let encoding = target.parameterEncoding(path: path);
-        let parameters = target.parameters();
-        let request = sessionManager.request(url, method:method, parameters: parameters, encoding:encoding, headers: headers)
+        addCookies(cookies: cookies);
+        let request = sessionManager.request(url, method:method, parameters: parameters, encoding:_encoding, headers: headers)
         if !allowDuplicateRequest {
             dataRequests.updateValue(request, forKey: urlString);
         }
@@ -151,8 +173,15 @@ public class BaseNetworkService: NSObject {
             dataRequests.removeValue(forKey: urlString);
         }
     }
-
     
+    
+    public class func addCookies(cookies:[HTTPCookie]?){
+        if let cookies = cookies {
+            for cookie in cookies {
+                HTTPCookieStorage.shared.setCookie(cookie);
+            }
+        }
+    }
     
     private class func uploadImageAppendParameters(formData:Alamofire.MultipartFormData,parameters:[String:String]?,thumbMark:Bool = true) {
         if let params = parameters {
@@ -220,7 +249,7 @@ public class BaseNetworkService: NSObject {
         return headers;
     }
 
-   class func addHeader(name: String, value: String) {
+    public class func addHeader(name: String, value: String) {
         userHeaders.updateValue(value, forKey: name);
     }
     

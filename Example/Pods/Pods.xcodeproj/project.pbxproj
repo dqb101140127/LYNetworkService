@@ -12,7 +12,7 @@
 		02DB462B121245593CE653B9B377F970 /* Protected.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C79DD03340ACC43C6503F0378DF94D7 /* Protected.swift */; };
 		044973538553B114516678D144E318CA /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42F1B5DAD393A24D430CA2F5ECA8409 /* Serializer.swift */; };
 		0B399DCF32F8FE4F09B03B6E7B65E0D1 /* Alamofire-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E70E7B662E7510D5B86488969B68EAA /* Alamofire-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0C613FFF27C3306B00613224 /* NetworkServiceTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C613FFE27C3306B00613224 /* NetworkServiceTarget.swift */; };
+		0C2C158827C365B0000ACD54 /* NetworkServiceTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2C158727C365B0000ACD54 /* NetworkServiceTarget.swift */; };
 		0F4D0B7B522466B970AA826F57343EFF /* DataTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50BCB18F216ADC12D31ADDFAEF7FD5F /* DataTransform.swift */; };
 		123E6BAD784E74477DC5B5CFF0272759 /* AnyExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22CF8FAA27F9A02A411B5BDBA433B2B2 /* AnyExtensions.swift */; };
 		13E62623092B680C6A5C349D48B8A4FD /* CachedResponseHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F522CF0B466CC1BDF375B47B8E09016 /* CachedResponseHandler.swift */; };
@@ -202,8 +202,8 @@
 		05B9658E219E8FFD28EE34B03C31578D /* HandyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HandyJSON-umbrella.h"; sourceTree = "<group>"; };
 		05D601BDD6F5F6E49088E17F82313DFC /* Session.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Session.swift; path = Source/Session.swift; sourceTree = "<group>"; };
 		0941B56AFEFAE2A85E433AA1B722D3E4 /* LYResponseModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LYResponseModel.swift; path = LYNetworkService/Classes/LYResponseModel.swift; sourceTree = "<group>"; };
+		0C2C158727C365B0000ACD54 /* NetworkServiceTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkServiceTarget.swift; path = LYNetworkService/Classes/NetworkServiceTarget.swift; sourceTree = "<group>"; };
 		0C3D2357B49C364AB37A237EB1F30CC5 /* MangledName.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MangledName.swift; path = Source/MangledName.swift; sourceTree = "<group>"; };
-		0C613FFE27C3306B00613224 /* NetworkServiceTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceTarget.swift; sourceTree = "<group>"; };
 		0D31CBDEB20AACD2DABEDF967AA07117 /* Pods-LYNetworkService_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LYNetworkService_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		0DE5FA09C5A0E8C164BD8510B54490AE /* Alamofire-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Alamofire-prefix.pch"; sourceTree = "<group>"; };
 		0F522CF0B466CC1BDF375B47B8E09016 /* CachedResponseHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CachedResponseHandler.swift; path = Source/CachedResponseHandler.swift; sourceTree = "<group>"; };
@@ -562,7 +562,7 @@
 				29ACF2E9D78064F754D95786E1717B63 /* CommonConfig.swift */,
 				0941B56AFEFAE2A85E433AA1B722D3E4 /* LYResponseModel.swift */,
 				D9EF097F8AC0749CFD82B0402CA314BB /* NetworkService.swift */,
-				0C613FFE27C3306B00613224 /* NetworkServiceTarget.swift */,
+				0C2C158727C365B0000ACD54 /* NetworkServiceTarget.swift */,
 				96B1C7D4EEC5273B3A271CA77567B2DB /* Pod */,
 				4F0BB68C01F5682CA5B53FA2E72DCF36 /* Support Files */,
 			);
@@ -1120,7 +1120,7 @@
 				E965799897EDA64D60A272D99675F192 /* LYNetworkService-dummy.m in Sources */,
 				1F4301984570328B2A9ED9F2119C6A44 /* LYResponseModel.swift in Sources */,
 				46509200E94EDD6591BCEAB293D95A8A /* NetworkService.swift in Sources */,
-				0C613FFF27C3306B00613224 /* NetworkServiceTarget.swift in Sources */,
+				0C2C158827C365B0000ACD54 /* NetworkServiceTarget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
