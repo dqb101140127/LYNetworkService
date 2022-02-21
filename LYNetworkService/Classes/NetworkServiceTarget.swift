@@ -24,12 +24,12 @@ extension NetworkServiceTarget {
     
     //MARK 返回指定的响应模型
     public func result<M:HandyJSON>(model:M.Type,
-                                  result:@escaping (LYResponseModel<M>)->()) {
+                                 _ result:@escaping (_ responseModel:LYResponseModel<M>)->()) {
        NetworkService.requestDataModel(self, model: model, result: result);
     }
     // MARK: 返回自定义模型
     public func customResult<M:HandyJSON>(model:M.Type,
-                                  result:@escaping (Bool,String?,M?)->()) {
+                                       _ result:@escaping (_ res:Bool,_ message:String?,_ model:M?)->()) {
        NetworkService.requestCustomDataModel(self, model: model, result: result);
     }
 }
