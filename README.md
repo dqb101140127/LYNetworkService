@@ -105,7 +105,7 @@ extension PublicAPI:NetworkServiceTarget {
         }
     }
 
-#### 第一种请求方式
+#### 第二种请求方式（可能更方便一点）
     func testRequest2() {
         PublicAPI.testRequest(code: "021").result(model: TestModel.self) { responseModel in
             print(responseModel);

@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     
     func testRequest2() {
         PublicAPI.testRequest(code: "021").result(model: TestModel.self) { responseModel in
-            print(responseModel.model?.headLine);
+            print(responseModel.model?.headLine as Any);
         }
     }
 

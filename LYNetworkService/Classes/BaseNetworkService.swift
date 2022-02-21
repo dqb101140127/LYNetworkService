@@ -175,17 +175,8 @@ public class BaseNetworkService: NSObject {
     }
 
         
-   class func uploadImages(images:[UIImage],thumbMark:Bool = true,parameters:[String:String]? = nil,progressClosure:((Progress) -> Void)? = nil,successCallback:@escaping(([[String : Any]]?) -> ()),fail:@escaping FailureClosure) {
-        uploadImagesSimply(images: images, thumbMark: thumbMark, parameters: parameters, progressClosure: progressClosure, successCallback: { (responseModel) in
-    //        if responseModel.status == 1 {
-    //            let images = responseModel.data["fileInfoList"].arrayObject?.compactMap({ (dict) -> DMImageModel? in
-    //                DMImageModel.deserialize(from: dict as? [String : Any]);
-    //            })
-    //            successCallback(images);
-    //        }else{
-    //            fail(responseModel.message,nil);
-    //        }
-        }, fail: fail)
+   class func uploadImages(images:[UIImage],thumbMark:Bool = true,parameters:[String:String]? = nil,progressClosure:((Progress) -> Void)? = nil,successCallback:@escaping SuccessClosure,fail:@escaping FailureClosure) {
+        uploadImagesSimply(images: images, thumbMark: thumbMark, parameters: parameters, progressClosure: progressClosure, successCallback:successCallback, fail: fail)
     }
 
    class func uploadImagesSimply(images:[UIImage],compressSize:Int = 0,thumbMark:Bool = true,parameters:[String:String]? = nil,urlString:String? = nil,progressClosure:((Progress) -> Void)? = nil,successCallback:@escaping SuccessClosure,fail:@escaping FailureClosure) {
@@ -207,8 +198,12 @@ public class BaseNetworkService: NSObject {
             LYLog(progress);
         }
         uploadRequest.responseData(queue: DispatchQueue.main) { (response) in
-            if response.error != nil {
-                
+            switch response.result {
+            case .success(let data):
+                successCallback(data);
+            case .failure(let error):
+                fail(error.errorMsg,error);
+                break;
             }
         }
     }
