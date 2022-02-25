@@ -60,11 +60,35 @@ public class NetworkService:BaseNetworkService {
            let res = dataConvertToJson(data: data, fail: nil);
            let json = res.0;
            let t = M.deserialize(from: json?.dictionaryObject);
-           result(true,nil,t);
+           result(true,res.1,t);
        }, fail: {  (message,error) in
            result(false,message,nil);
        })
     }
+    
+    public class func requestJson<T:NetworkServiceTarget>( _ target:T,
+                                                           _ result:@escaping (_ responseModel:ResponseModel)->()) {
+        makeRequest(target,result: { (data) in
+            let res = dataConvertToJson(data: data, fail: nil);
+            let json = res.0;
+            if res.1 != nil {
+                let responseModel = ResponseModel.makeResponseModel(errorMessage: res.1, error: nil);
+                result(responseModel);
+            }else{
+                let responseModel = ResponseModel();
+                responseModel.result  = json?[target.resultKey].boolValue ?? false;
+                responseModel.status  = json?[target.statusKey].intValue ?? 0;
+                responseModel.errorCode = json?[target.errorCodeKey].stringValue;
+                responseModel.errorMessage = json?[target.errorMessageKey].stringValue;
+                responseModel.data = data;
+                responseModel.body = json?[target.bodyKey];
+                result(responseModel);
+            }
+        }, fail: {  (message,error) in
+           let responseModel = ResponseModel.makeResponseModel(errorMessage: message, error: error);
+            result(responseModel);
+        })
+     }
 
     class func dataConvertToJson(data:Data,fail:FailureClosure?) -> (JSON?,String?) {
         do {

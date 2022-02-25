@@ -39,7 +39,7 @@ struct TestModel:HandyJSON  {
 extension NetworkServiceTarget {
 
     var resultKey: String {
-        return "result"
+        return "status"
     }
     
     var statusKey: String {

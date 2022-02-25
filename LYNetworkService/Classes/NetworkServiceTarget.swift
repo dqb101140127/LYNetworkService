@@ -32,4 +32,8 @@ extension NetworkServiceTarget {
                                        _ result:@escaping (_ res:Bool,_ message:String?,_ model:M?)->()) {
        NetworkService.requestCustomDataModel(self, model: model, result: result);
     }
+    
+    public func responseJson(_ result:@escaping (_ responseModel:ResponseModel)->()) {
+        NetworkService.requestJson(self, result);
+    }
 }
