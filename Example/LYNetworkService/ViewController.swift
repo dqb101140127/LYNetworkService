@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     }
     
     func testRequest1() {
-        NetworkService.init().requestDataModel(PublicAPI.testRequest(code: "021"), model: TestModel.self) { responseModel in
+        NetworkService.share.requestDataModel(PublicAPI.testRequest(code: "021"), model: TestModel.self) { responseModel in
             print(responseModel);
         }
     }

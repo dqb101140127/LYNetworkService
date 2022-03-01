@@ -73,8 +73,8 @@ public extension BaseNetworkServiceTarget {
 }
 
 
+private var dataRequests = [String:DataRequest]();
 public class BaseNetworkService: NSObject {
-    private var dataRequests = [String:DataRequest]();
     public let sessionManager : Alamofire.Session = defaultAlamofireSession();
 
     public class func createCookie(name:String,value:String,domain:String) -> HTTPCookie? {
@@ -153,7 +153,7 @@ public class BaseNetworkService: NSObject {
                 fail(error.errorMsg,error);
                 break;
             }
-            self.dataRequests.removeValue(forKey: urlString);
+            dataRequests.removeValue(forKey: urlString);
         }
     }
     
