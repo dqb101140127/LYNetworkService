@@ -13,14 +13,14 @@ import Alamofire
 
 
 public class NetworkService:BaseNetworkService {
-    
+    public static let share:NetworkService = NetworkService();
     //MARK 返回指定的响应模型
-   public class func requestDataModel<T:NetworkServiceTarget,M:HandyJSON>( _ target:T,
+    public func requestDataModel<T:NetworkServiceTarget,M:HandyJSON>( _ target:T,
                                                                               model:M.Type,
                                                                              result:@escaping (LYResponseModel<M>)->()) {
        
        makeRequest(target, result: { (data) in
-           let res = dataConvertToJson(data: data, fail: nil);
+           let res = NetworkService.dataConvertToJson(data: data, fail: nil);
            let json = res.0;
            let responseModel = LYResponseModel<M>.deserialize(from: json?.dictionaryObject);
            responseModel?.data = data;
@@ -53,11 +53,11 @@ public class NetworkService:BaseNetworkService {
     
     
     //MARK 返回自定义数据模型
-   public class func requestCustomDataModel<T:BaseNetworkServiceTarget,M:HandyJSON>( _ target:T,
+   public func requestCustomDataModel<T:BaseNetworkServiceTarget,M:HandyJSON>( _ target:T,
                                                                                     model:M.Type,
                                                                                    result:@escaping (Bool,String?,M?)->()) {
        makeRequest(target,result: { (data) in
-           let res = dataConvertToJson(data: data, fail: nil);
+           let res = NetworkService.dataConvertToJson(data: data, fail: nil);
            let json = res.0;
            let t = M.deserialize(from: json?.dictionaryObject);
            result(true,res.1,t);
@@ -66,10 +66,10 @@ public class NetworkService:BaseNetworkService {
        })
     }
     
-    public class func requestJson<T:NetworkServiceTarget>( _ target:T,
+    public func requestJson<T:NetworkServiceTarget>( _ target:T,
                                                            _ result:@escaping (_ responseModel:ResponseModel)->()) {
         makeRequest(target,result: { (data) in
-            let res = dataConvertToJson(data: data, fail: nil);
+            let res = NetworkService.dataConvertToJson(data: data, fail: nil);
             let json = res.0;
             if res.1 != nil {
                 let responseModel = ResponseModel.makeResponseModel(errorMessage: res.1, error: nil);

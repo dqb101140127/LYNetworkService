@@ -74,16 +74,8 @@ public extension BaseNetworkServiceTarget {
 
 
 public class BaseNetworkService: NSObject {
-    private static var dataRequests = [String:DataRequest]();
-    private static var userHeaders = [String:String]();
-    private static let  sessionManager : Alamofire.Session = {
-        let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 40
-        configuration.urlCache = nil;
-        configuration.headers = NetworkService.makeHttpHeaders();
-        let manager = Alamofire.Session.init(configuration: configuration, startRequestsImmediately: true);
-        return manager
-    }()
+    private var dataRequests = [String:DataRequest]();
+    public let sessionManager : Alamofire.Session = defaultAlamofireSession();
 
     public class func createCookie(name:String,value:String,domain:String) -> HTTPCookie? {
         var propertys = [HTTPCookiePropertyKey :Any]();
@@ -96,9 +88,9 @@ public class BaseNetworkService: NSObject {
     }
     
   
-    public class func makeRequest<T:BaseNetworkServiceTarget>(_ target:T,
-                                                                result:@escaping SuccessClosure,
-                                                                  fail:@escaping FailureClosure) {
+    public func makeRequest<T:BaseNetworkServiceTarget>(_ target:T,
+                                                          result:@escaping SuccessClosure,
+                                                            fail:@escaping FailureClosure) {
         let path = target.path;
         let urlString = target.baseURL + path;
         guard let url : URL = URL.init(string: urlString) else {return}
@@ -112,7 +104,7 @@ public class BaseNetworkService: NSObject {
         request(urlString: urlString, parameters: parameters, method: method, header: customHeader, encoding: encoding, cookies: cookies, enableLog: enableLog, allowDuplicateRequest: allowDuplicateRequest, result: result, fail: fail);
     }
 
-    public class func request(urlString:String,
+    public func request(urlString:String,
                              parameters:[String:Any]?,
                                  method:HTTPMethod = .post,
                                  header:[String:String]? = nil,
@@ -124,7 +116,7 @@ public class BaseNetworkService: NSObject {
                                  result:@escaping SuccessClosure,
                                    fail:@escaping FailureClosure) {
         guard let url : URL = URL.init(string: urlString) else {return};
-        if let _ = BaseNetworkService.dataRequests[urlString], !allowDuplicateRequest {
+        if let _ = dataRequests[urlString], !allowDuplicateRequest {
             fail("努力加载中...",nil);
             return;
         }
@@ -139,20 +131,11 @@ public class BaseNetworkService: NSObject {
             }
         }
 
-        var headers = BaseNetworkService.makeHttpHeaders();
-        if let customHeader = header {
-            for (key,value) in customHeader {
-                if headers.value(for: key) == nil {
-                    headers.add(name: key, value: value);
-                }else{
-                    headers.update(name: key, value: value);
-                }
-            }
-        }
+        let headers = BaseNetworkService.makeHttpHeaders(userHeaders: header);
         BaseNetworkService.addCookies(cookies: cookies);
-        let request = BaseNetworkService.sessionManager.request(url, method:method, parameters: parameters, encoding:_encoding, headers: headers)
+        let request = sessionManager.request(url, method:method, parameters: parameters, encoding:_encoding, headers: headers)
         if !allowDuplicateRequest {
-            BaseNetworkService.dataRequests.updateValue(request, forKey: urlString);
+            dataRequests.updateValue(request, forKey: urlString);
         }
         if enableLog {
             let para = JSON(parameters ?? "");
@@ -170,7 +153,7 @@ public class BaseNetworkService: NSObject {
                 fail(error.errorMsg,error);
                 break;
             }
-            dataRequests.removeValue(forKey: urlString);
+            self.dataRequests.removeValue(forKey: urlString);
         }
     }
     
@@ -204,11 +187,12 @@ public class BaseNetworkService: NSObject {
     }
 
         
-   class func uploadImages(images:[UIImage],thumbMark:Bool = true,parameters:[String:String]? = nil,progressClosure:((Progress) -> Void)? = nil,successCallback:@escaping SuccessClosure,fail:@escaping FailureClosure) {
+    func uploadImages(images:[UIImage],thumbMark:Bool = true,parameters:[String:String]? = nil,progressClosure:((Progress) -> Void)? = nil,successCallback:@escaping SuccessClosure,fail:@escaping FailureClosure) {
         uploadImagesSimply(images: images, thumbMark: thumbMark, parameters: parameters, progressClosure: progressClosure, successCallback:successCallback, fail: fail)
     }
 
-   class func uploadImagesSimply(images:[UIImage],compressSize:Int = 0,thumbMark:Bool = true,parameters:[String:String]? = nil,urlString:String? = nil,progressClosure:((Progress) -> Void)? = nil,successCallback:@escaping SuccessClosure,fail:@escaping FailureClosure) {
+   
+    func uploadImagesSimply(images:[UIImage],compressSize:Int = 0,thumbMark:Bool = true,parameters:[String:String]? = nil,urlString:String? = nil,progressClosure:((Progress) -> Void)? = nil,successCallback:@escaping SuccessClosure,fail:@escaping FailureClosure) {
         if images.count == 0 {
             fail("未获取到图片信息",nil);
             return;
@@ -217,8 +201,8 @@ public class BaseNetworkService: NSObject {
         guard let url : URL = URL.init(string:urlStr) else {return};
     //    sessionManager.sessionConfiguration.timeoutIntervalForRequest = 60;
         let uploadRequest = sessionManager.upload(multipartFormData: { (formData) in
-            uploadImageAppendParameters(formData: formData, parameters: parameters);
-            uploadImageAppendImages(formData: formData, images: images,compressSize:compressSize);
+            BaseNetworkService.uploadImageAppendParameters(formData: formData, parameters: parameters);
+            BaseNetworkService.uploadImageAppendImages(formData: formData, images: images,compressSize:compressSize);
         }, to: url);
         uploadRequest.uploadProgress { (progress) in
             if progressClosure != nil {
@@ -237,20 +221,18 @@ public class BaseNetworkService: NSObject {
         }
     }
     
-    private class func makeHttpHeaders() -> HTTPHeaders {
+    private class func makeHttpHeaders(userHeaders:[String:String]?) -> HTTPHeaders {
         var headers = HTTPHeaders.default;
-        for (key,value) in userHeaders {
-            if headers.value(for: key) == nil {
-                headers.add(name: key, value: value);
-            }else{
-                headers.update(name: key, value: value);
+        if let customHeader = userHeaders {
+            for (key,value) in customHeader {
+                if headers.value(for: key) == nil {
+                    headers.add(name: key, value: value);
+                }else{
+                    headers.update(name: key, value: value);
+                }
             }
         }
         return headers;
-    }
-
-    public class func addHeader(name: String, value: String) {
-        userHeaders.updateValue(value, forKey: name);
     }
     
     func netWorkStatus(resultCallBack:@escaping (LYNetworkStatus) -> ()) {
@@ -267,6 +249,14 @@ public class BaseNetworkService: NSObject {
                 resultCallBack(LYNetworkStatus.unknown);
             }
         })
+    }
+    
+    final class func defaultAlamofireSession() -> Alamofire.Session {
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForRequest = 40
+        configuration.urlCache = nil;
+        let manager = Alamofire.Session.init(configuration: configuration, startRequestsImmediately: true);
+        return manager
     }
 }
 
