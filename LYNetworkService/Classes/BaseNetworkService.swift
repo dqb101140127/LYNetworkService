@@ -76,7 +76,7 @@ public extension BaseNetworkServiceTarget {
 public class BaseNetworkService: NSObject {
     private static var dataRequests = [String:DataRequest]();
     private static var userHeaders = [String:String]();
-    private static var  sessionManager : Alamofire.Session = {
+    private static let  sessionManager : Alamofire.Session = {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 40
         configuration.urlCache = nil;
@@ -124,7 +124,7 @@ public class BaseNetworkService: NSObject {
                                  result:@escaping SuccessClosure,
                                    fail:@escaping FailureClosure) {
         guard let url : URL = URL.init(string: urlString) else {return};
-        if let _ = dataRequests[urlString], !allowDuplicateRequest {
+        if let _ = BaseNetworkService.dataRequests[urlString], !allowDuplicateRequest {
             fail("努力加载中...",nil);
             return;
         }
@@ -139,7 +139,7 @@ public class BaseNetworkService: NSObject {
             }
         }
 
-        var headers = makeHttpHeaders();
+        var headers = BaseNetworkService.makeHttpHeaders();
         if let customHeader = header {
             for (key,value) in customHeader {
                 if headers.value(for: key) == nil {
@@ -149,10 +149,10 @@ public class BaseNetworkService: NSObject {
                 }
             }
         }
-        addCookies(cookies: cookies);
-        let request = sessionManager.request(url, method:method, parameters: parameters, encoding:_encoding, headers: headers)
+        BaseNetworkService.addCookies(cookies: cookies);
+        let request = BaseNetworkService.sessionManager.request(url, method:method, parameters: parameters, encoding:_encoding, headers: headers)
         if !allowDuplicateRequest {
-            dataRequests.updateValue(request, forKey: urlString);
+            BaseNetworkService.dataRequests.updateValue(request, forKey: urlString);
         }
         if enableLog {
             let para = JSON(parameters ?? "");
