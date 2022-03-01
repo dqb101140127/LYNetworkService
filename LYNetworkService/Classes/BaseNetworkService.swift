@@ -36,7 +36,7 @@ public protocol BaseNetworkServiceTarget {
     func method(path:String) -> HTTPMethod;
     func headers(path:String) -> [String:String]?;
     func cookies(url:URL) -> [HTTPCookie]?;
-    func didReceiveData(error:LYError?,data:Data);
+    func didReceiveData(error:LYError?,data:Data,json:JSON?);
 }
 public extension BaseNetworkServiceTarget {
     func parameters() -> [String:Any]? {
@@ -57,7 +57,7 @@ public extension BaseNetworkServiceTarget {
     func headers(path:String) -> [String:String]?{
         return nil;
     }
-    func didReceiveData(error:LYError?,data:Data) {
+    func didReceiveData(error:LYError?,data:Data,json:JSON?) {
         LYLog("didReceiveData-方法未实现")
     }
     func cookies(url:URL) -> [HTTPCookie]? {
@@ -142,10 +142,6 @@ public class BaseNetworkService: NSObject {
             LYLog("=请求地址===\(urlString)==请求参数=",para);
         }
         request.responseData(queue: DispatchQueue.main) { (response) in
-            if enableLog,let data = response.data {
-                let json = try? JSON.init(data: data, options: .fragmentsAllowed);
-                LYLog("=请求地址===\(urlString)==数据返回=",json);
-            }
             switch response.result {
             case .success(let data):
                 result(data);

@@ -8,6 +8,7 @@
 
 import UIKit
 import LYNetworkService
+import SwiftyJSON
 
 extension NetworkServiceTarget {
     var resultKey: String {
@@ -33,6 +34,10 @@ enum PublicAPI {
 }
 
 extension PublicAPI:NetworkServiceTarget {
+
+    func didReceiveData(error: LYError?, data: Data, json: JSON?) {
+        print(json);
+    }
   
     var baseURL: String {
         switch self {

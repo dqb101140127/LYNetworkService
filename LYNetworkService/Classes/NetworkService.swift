@@ -16,12 +16,13 @@ public class NetworkService:BaseNetworkService {
     public static let share:NetworkService = NetworkService();
     //MARK 返回指定的响应模型
     public func requestDataModel<T:NetworkServiceTarget,M:HandyJSON>( _ target:T,
-                                                                              model:M.Type,
-                                                                             result:@escaping (LYResponseModel<M>)->()) {
+                                                                         model:M.Type,
+                                                                        result:@escaping (LYResponseModel<M>)->()) {
        
        makeRequest(target, result: { (data) in
-           let res = NetworkService.dataConvertToJson(data: data, fail: nil);
+           let res = NetworkService.dataConvertToJson(target:target,data: data, fail: nil);
            let json = res.0;
+           LYLog("=请求路径===\(target.path)==数据返回=",json);
            let responseModel = LYResponseModel<M>.deserialize(from: json?.dictionaryObject);
            responseModel?.data = data;
            responseModel?.result  = json?[target.resultKey].boolValue ?? false;
@@ -57,8 +58,9 @@ public class NetworkService:BaseNetworkService {
                                                                                     model:M.Type,
                                                                                    result:@escaping (Bool,String?,M?)->()) {
        makeRequest(target,result: { (data) in
-           let res = NetworkService.dataConvertToJson(data: data, fail: nil);
+           let res = NetworkService.dataConvertToJson(target:target,data: data, fail: nil);
            let json = res.0;
+           LYLog("=请求路径===\(target.path)==数据返回=",json);
            let t = M.deserialize(from: json?.dictionaryObject);
            result(true,res.1,t);
        }, fail: {  (message,error) in
@@ -69,8 +71,9 @@ public class NetworkService:BaseNetworkService {
     public func requestJson<T:NetworkServiceTarget>( _ target:T,
                                                            _ result:@escaping (_ responseModel:ResponseModel)->()) {
         makeRequest(target,result: { (data) in
-            let res = NetworkService.dataConvertToJson(data: data, fail: nil);
+            let res = NetworkService.dataConvertToJson(target:target,data: data, fail: nil);
             let json = res.0;
+            LYLog("=请求路径===\(target.path)==数据返回=",json);
             if res.1 != nil {
                 let responseModel = ResponseModel.makeResponseModel(errorMessage: res.1, error: nil);
                 result(responseModel);
@@ -90,12 +93,14 @@ public class NetworkService:BaseNetworkService {
         })
      }
 
-    class func dataConvertToJson(data:Data,fail:FailureClosure?) -> (JSON?,String?) {
+    class func dataConvertToJson<T:BaseNetworkServiceTarget>(target:T,data:Data,fail:FailureClosure?) -> (JSON?,String?) {
         do {
             let json = try JSON.init(data: data, options: .fragmentsAllowed);
+            target.didReceiveData(error: nil, data: data, json: json);
             return (json,nil);
         }catch let error{
             LYLog(error)
+            target.didReceiveData(error: LYError.responseSerializationFailed(reason: .jsonSerializationFailed(error: error)), data: data, json: nil);
             fail?("数据异常",nil)
             return (nil,"数据异常");
         }
