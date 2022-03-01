@@ -100,7 +100,7 @@ extension PublicAPI:NetworkServiceTarget {
 
 #### 第一种请求方式
     func testRequest1() {
-        NetworkService.requestDataModel(PublicAPI.testRequest(code: "021"), model: TestModel.self) { responseModel in
+        NetworkService.share.requestDataModel(PublicAPI.testRequest(code: "021"), model: TestModel.self) { responseModel in
             print(responseModel);
         }
     }
@@ -111,4 +111,7 @@ extension PublicAPI:NetworkServiceTarget {
             print(responseModel);
         }
     }
+
+ 
+    
 
