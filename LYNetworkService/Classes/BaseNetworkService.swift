@@ -252,6 +252,7 @@ public class BaseNetworkService: NSObject {
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 40
         configuration.urlCache = nil;
+        configuration.requestCachePolicy = .reloadIgnoringLocalCacheData;
         let manager = Alamofire.Session.init(configuration: configuration, startRequestsImmediately: true);
         return manager
     }
