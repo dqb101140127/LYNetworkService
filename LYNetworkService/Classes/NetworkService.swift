@@ -16,10 +16,11 @@ public class NetworkService:BaseNetworkService {
     public static let share:NetworkService = NetworkService();
     //MARK 返回指定的响应模型
     public func requestDataModel<T:NetworkServiceTarget,M:HandyJSON>( _ target:T,
+                                                                    parameters:[String:Any]? = nil,
                                                                          model:M.Type,
                                                                         result:@escaping (LYResponseModel<M>)->()) {
        
-       makeRequest(target, result: { (data) in
+       makeRequest(target,parameters: parameters, result: { (data) in
            let res = NetworkService.dataConvertToJson(target:target,data: data, fail: nil);
            let json = res.0;
            LYLog("=请求路径===\(target.path)==数据返回=",json);
@@ -55,9 +56,10 @@ public class NetworkService:BaseNetworkService {
     
     //MARK 返回自定义数据模型
    public func requestCustomDataModel<T:BaseNetworkServiceTarget,M:HandyJSON>( _ target:T,
-                                                                                    model:M.Type,
-                                                                                   result:@escaping (Bool,String?,M?)->()) {
-       makeRequest(target,result: { (data) in
+                                                                             parameters:[String:Any]? = nil,
+                                                                                  model:M.Type,
+                                                                                 result:@escaping (Bool,String?,M?)->()) {
+       makeRequest(target,parameters: parameters,result: { (data) in
            let res = NetworkService.dataConvertToJson(target:target,data: data, fail: nil);
            let json = res.0;
            LYLog("=请求路径===\(target.path)==数据返回=",json);
@@ -69,8 +71,9 @@ public class NetworkService:BaseNetworkService {
     }
     
     public func requestJson<T:NetworkServiceTarget>( _ target:T,
-                                                           _ result:@escaping (_ responseModel:ResponseModel)->()) {
-        makeRequest(target,result: { (data) in
+                                                   parameters:[String:Any]? = nil,
+                                                     _ result:@escaping (_ responseModel:ResponseModel)->()) {
+        makeRequest(target,parameters: parameters,result: { (data) in
             let res = NetworkService.dataConvertToJson(target:target,data: data, fail: nil);
             let json = res.0;
             LYLog("=请求路径===\(target.path)==数据返回=",json);

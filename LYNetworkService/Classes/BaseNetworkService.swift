@@ -89,6 +89,7 @@ public class BaseNetworkService: NSObject {
     
   
     public func makeRequest<T:BaseNetworkServiceTarget>(_ target:T,
+                                                      parameters:[String:Any]? = nil,
                                                           result:@escaping SuccessClosure,
                                                             fail:@escaping FailureClosure) {
         let path = target.path;
@@ -100,8 +101,8 @@ public class BaseNetworkService: NSObject {
         let enableLog = target.enableLog(path: path);
         let method = target.method(path: path);
         let encoding = target.parameterEncoding(path: path);
-        let parameters = target.parameters();
-        request(urlString: urlString, parameters: parameters, method: method, header: customHeader, encoding: encoding, cookies: cookies, enableLog: enableLog, allowDuplicateRequest: allowDuplicateRequest, result: result, fail: fail);
+        let para = parameters ?? target.parameters();
+        request(urlString: urlString, parameters: para, method: method, header: customHeader, encoding: encoding, cookies: cookies, enableLog: enableLog, allowDuplicateRequest: allowDuplicateRequest, result: result, fail: fail);
     }
 
     public func request(urlString:String,
