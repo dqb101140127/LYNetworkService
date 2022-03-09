@@ -23,7 +23,6 @@ public class NetworkService:BaseNetworkService {
        makeRequest(target,parameters: parameters, result: { (data) in
            let res = NetworkService.dataConvertToJson(target:target,data: data, fail: nil);
            let json = res.0;
-           LYLog("=请求路径===\(target.path)==数据返回=",json);
            let responseModel = LYResponseModel<M>.deserialize(from: json?.dictionaryObject);
            responseModel?.data = data;
            responseModel?.jsonData = json;
@@ -63,7 +62,6 @@ public class NetworkService:BaseNetworkService {
        makeRequest(target,parameters: parameters,result: { (data) in
            let res = NetworkService.dataConvertToJson(target:target,data: data, fail: nil);
            let json = res.0;
-           LYLog("=请求路径===\(target.path)==数据返回=",json);
            let t = M.deserialize(from: json?.dictionaryObject);
            result(true,res.1,t);
        }, fail: {  (message,error) in
@@ -77,7 +75,6 @@ public class NetworkService:BaseNetworkService {
         makeRequest(target,parameters: parameters,result: { (data) in
             let res = NetworkService.dataConvertToJson(target:target,data: data, fail: nil);
             let json = res.0;
-            LYLog("=请求路径===\(target.path)==数据返回=",json);
             if res.1 != nil {
                 let responseModel = ResponseModel.makeResponseModel(errorMessage: res.1, error: nil);
                 result(responseModel);
@@ -101,6 +98,9 @@ public class NetworkService:BaseNetworkService {
     class func dataConvertToJson<T:BaseNetworkServiceTarget>(target:T,data:Data,fail:FailureClosure?) -> (JSON?,String?) {
         do {
             let json = try JSON.init(data: data, options: .fragmentsAllowed);
+            if target.enableLog(path: target.path) {
+                LYLog("=请求路径===\(target.path)==数据返回=",json);
+            }
             target.didReceiveData(error: nil, data: data, json: json);
             return (json,nil);
         }catch let error{

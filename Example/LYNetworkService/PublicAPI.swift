@@ -36,7 +36,7 @@ enum PublicAPI {
 extension PublicAPI:NetworkServiceTarget {
 
     func didReceiveData(error: LYError?, data: Data, json: JSON?) {
-        print(json);
+        print("接收到数据-----\(json ?? "")");
     }
   
     var baseURL: String {
@@ -64,6 +64,10 @@ extension PublicAPI:NetworkServiceTarget {
         case .testRequest(_):
             return .get
         }
+    }
+    
+    func enableLog(path: String) -> Bool {
+        return false;
     }
     
 }
