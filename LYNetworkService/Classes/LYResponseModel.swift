@@ -18,6 +18,7 @@ public class ResponseModel {
     public var errorMessage : String?
     public var error:LYError?
     public var data : Data?;//原始数据
+    public var jsonData : JSON?;//原始数据
     public var body:JSON?;
     
     class func makeResponseModel(errorMessage:String?,error:LYError?) -> ResponseModel {
@@ -35,6 +36,7 @@ public class LYResponseModel<T:HandyJSON>:HandyJSON {
     public var errorMessage : String?
     public var error:LYError?
     public var data : Data?;//原始数据
+    public var jsonData : JSON?;//原始数据
     public var model : T?;
     public var models:[T]?;
   
@@ -42,7 +44,7 @@ public class LYResponseModel<T:HandyJSON>:HandyJSON {
         mapper >>> model
         mapper >>> models
         mapper >>> data
-//        mapper >>> json
+        mapper >>> jsonData
     }
     public required init() {}
     class func makeErrorResponseModel(errorMessage:String?,error:LYError?) -> LYResponseModel<T> {

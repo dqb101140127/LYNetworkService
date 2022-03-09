@@ -26,6 +26,7 @@ public class NetworkService:BaseNetworkService {
            LYLog("=请求路径===\(target.path)==数据返回=",json);
            let responseModel = LYResponseModel<M>.deserialize(from: json?.dictionaryObject);
            responseModel?.data = data;
+           responseModel?.jsonData = json;
            responseModel?.result  = json?[target.resultKey].boolValue ?? false;
            responseModel?.status  = json?[target.statusKey].intValue ?? 0;
            responseModel?.errorCode = json?[target.errorCodeKey].stringValue;
@@ -87,6 +88,7 @@ public class NetworkService:BaseNetworkService {
                 responseModel.errorCode = json?[target.errorCodeKey].stringValue;
                 responseModel.errorMessage = json?[target.errorMessageKey].stringValue;
                 responseModel.data = data;
+                responseModel.jsonData = json;
                 responseModel.body = json?[target.bodyKey];
                 result(responseModel);
             }
