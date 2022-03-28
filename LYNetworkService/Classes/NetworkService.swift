@@ -101,11 +101,11 @@ public class NetworkService:BaseNetworkService {
             if target.enableLog(path: target.path) {
                 LYLog("=请求路径===\(target.path)==数据返回=",json);
             }
-            target.didReceiveData(error: nil, data: data, json: json);
+            target.didReceiveData(path: target.path, error: nil, data: data, json: json);
             return (json,nil);
         }catch let error{
             LYLog(error)
-            target.didReceiveData(error: LYError.responseSerializationFailed(reason: .jsonSerializationFailed(error: error)), data: data, json: nil);
+            target.didReceiveData(path: target.path, error: LYError.responseSerializationFailed(reason: .jsonSerializationFailed(error: error)), data: data, json: nil);
             fail?("数据异常",nil)
             return (nil,"数据异常");
         }
