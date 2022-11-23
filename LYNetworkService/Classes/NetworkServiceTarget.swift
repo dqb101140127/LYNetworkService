@@ -29,7 +29,7 @@ extension NetworkServiceTarget {
         NetworkService.share.requestDataModel(self,parameters: parameters, model: model, result: result);
     }
     // MARK: 返回自定义模型
-    public func customResult<M:HandyJSON>(model:M.Type,
+    public func customResult<M:ModelJSON>(model:M.Type,
                                      parameters:[String:Any]? = nil,
                                        _ result:@escaping (_ res:Bool,_ message:String?,_ model:M?)->()) {
         NetworkService.share.requestCustomDataModel(self,parameters: parameters, model: model, result: result);

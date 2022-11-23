@@ -67,7 +67,7 @@ extension PublicAPI:NetworkServiceTarget {
     }
     
     func enableLog(path: String) -> Bool {
-        return false;
+        return true;
     }
     
 }

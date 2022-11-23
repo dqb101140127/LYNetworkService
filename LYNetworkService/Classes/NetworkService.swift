@@ -19,7 +19,6 @@ public class NetworkService:BaseNetworkService {
                                                                     parameters:[String:Any]? = nil,
                                                                          model:M.Type,
                                                                         result:@escaping (LYResponseModel<M>)->()) {
-       
        makeRequest(target,parameters: parameters, result: { (data) in
            let res = NetworkService.dataConvertToJson(target:target,data: data, fail: nil);
            let json = res.0;
@@ -55,15 +54,25 @@ public class NetworkService:BaseNetworkService {
     
     
     //MARK 返回自定义数据模型
-   public func requestCustomDataModel<T:BaseNetworkServiceTarget,M:HandyJSON>( _ target:T,
+   public func requestCustomDataModel<T:BaseNetworkServiceTarget,M:ModelJSON>( _ target:T,
                                                                              parameters:[String:Any]? = nil,
                                                                                   model:M.Type,
                                                                                  result:@escaping (Bool,String?,M?)->()) {
        makeRequest(target,parameters: parameters,result: { (data) in
-           let res = NetworkService.dataConvertToJson(target:target,data: data, fail: nil);
-           let json = res.0;
-           let t = M.deserialize(from: json?.dictionaryObject);
-           result(true,res.1,t);
+           do {
+               let json = try JSON.init(data: data, options: .fragmentsAllowed);
+               if target.enableLog(path: target.path) {
+                   LYLog("=请求路径===\(target.path)==数据返回=",json);
+               }
+               target.didReceiveData(path: target.path, error: nil, data: data, json: json);
+               let model = try JSONDecoder().decode(model, from: data);
+               
+               result(true, nil, model);
+           }catch let error{
+               LYLog(error)
+               target.didReceiveData(path: target.path, error: LYError.responseSerializationFailed(reason: .jsonSerializationFailed(error: error)), data: data, json: nil);
+               result(false,error.localizedDescription,nil);
+           }
        }, fail: {  (message,error) in
            result(false,message,nil);
        })

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C427264292DACD300F02A8C /* TestUserResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C427263292DACD300F02A8C /* TestUserResponseModel.swift */; };
 		0C75F89C279F9F1900AF3F31 /* PublicAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C75F89B279F9F1900AF3F31 /* PublicAPI.swift */; };
 		0C75F89E279FA2CE00AF3F31 /* APIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C75F89D279FA2CE00AF3F31 /* APIConfig.swift */; };
 		0C789C2F27BB724E00542C86 /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C789C2E27BB724E00542C86 /* TestModel.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C427263292DACD300F02A8C /* TestUserResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserResponseModel.swift; sourceTree = "<group>"; };
 		0C75F89B279F9F1900AF3F31 /* PublicAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicAPI.swift; sourceTree = "<group>"; };
 		0C75F89D279FA2CE00AF3F31 /* APIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfig.swift; sourceTree = "<group>"; };
 		0C789C2E27BB724E00542C86 /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				0C789C2E27BB724E00542C86 /* TestModel.swift */,
+				0C427263292DACD300F02A8C /* TestUserResponseModel.swift */,
 				0C75F89B279F9F1900AF3F31 /* PublicAPI.swift */,
 				0C75F89D279FA2CE00AF3F31 /* APIConfig.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
@@ -226,7 +229,7 @@
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = "";
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
@@ -279,10 +282,16 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-LYNetworkService_Tests/Pods-LYNetworkService_Tests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSnapshotTestCase/FBSnapshotTestCase.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSnapshotTestCase.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -368,6 +377,7 @@
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				0C75F89C279F9F1900AF3F31 /* PublicAPI.swift in Sources */,
 				0C789C2F27BB724E00542C86 /* TestModel.swift in Sources */,
+				0C427264292DACD300F02A8C /* TestUserResponseModel.swift in Sources */,
 				0C75F89E279FA2CE00AF3F31 /* APIConfig.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
@@ -559,7 +569,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LYNetworkService_Example.app/LYNetworkService_Example";
 			};
 			name = Debug;
@@ -577,7 +587,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LYNetworkService_Example.app/LYNetworkService_Example";
 			};
 			name = Release;

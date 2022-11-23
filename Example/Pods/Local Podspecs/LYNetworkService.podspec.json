@@ -1,6 +1,6 @@
 {
   "name": "LYNetworkService",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "summary": "A short description of LYNetworkService.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://gitee.com/dongluoyi/LYNetworkService",
@@ -13,17 +13,18 @@
   },
   "source": {
     "git": "https://gitee.com/dongluoyi/LYNetworkService.git",
-    "tag": "0.1.0"
+    "tag": "0.1.2"
   },
   "platforms": {
     "ios": "10.0"
   },
   "source_files": "LYNetworkService/Classes/**/*",
+  "resource_bundles": {
+    "LYNetworkService": [
+      "LYNetworkService/Assets/*.png"
+    ]
+  },
   "public_header_files": "Pod/Classes/**/*.h",
-  "frameworks": [
-    "UIKit",
-    "MapKit"
-  ],
   "dependencies": {
     "Alamofire": [
 

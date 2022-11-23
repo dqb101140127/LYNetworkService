@@ -24,19 +24,23 @@ extension LYCompatible {
 }
 
 
-public protocol ModelJSON:HandyJSON{
-    mutating func copyModel() -> Self;
+public protocol ModelJSON:Codable{
+    func copyModel() -> Self?;
 }
+
 extension String:HandyJSON{}
 extension NSNumber:HandyJSON {}
 extension Bool:HandyJSON {}
 
 
 extension ModelJSON {
-    public mutating func copyModel() -> Self {
-        let json = self.toJSON();
-        let model = Self.deserialize(from: json) ?? Self.init();
-        return model;
+    public func copyModel() -> Self? {
+        let enCoder = JSONEncoder();
+        if let data = try? enCoder.encode(self) {
+            let model = try? JSONDecoder().decode(Self.self, from: data);
+            return model;
+        }
+        return nil;
     }
 }
 

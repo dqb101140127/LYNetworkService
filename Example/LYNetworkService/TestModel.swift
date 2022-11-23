@@ -11,13 +11,13 @@ import LYNetworkService
 import HandyJSON
 
 
-struct TestModel: HandyJSON {
+struct TestModel: ModelJSON,HandyJSON {
     var headLine:[HeadLine]?;
     
 }
 
 
-struct HeadLine:HandyJSON {
+struct HeadLine:ModelJSON,HandyJSON{
     var showId:Int?
     var showName:String?
     

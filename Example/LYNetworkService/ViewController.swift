@@ -17,15 +17,20 @@ class ViewController: UIViewController {
         testRequest2();
     }
     
-//    func testRequest1() {
+    func testRequest1() {
 //        NetworkService.share.requestDataModel(PublicAPI.testRequest(code: "021"), model: TestModel.self) { responseModel in
 //            print(responseModel);
 //        }
-//    }
+        
+        PublicAPI.testRequest(code: "021").result(model: TestModel.self) { responseModel in
+            print(responseModel.status);
+            
+        }
+    }
     
     func testRequest2() {
-        PublicAPI.testRequest(code: "021").result(model: TestModel.self) { responseModel in
-//            print(responseModel.model?.headLine as Any);
+        PublicAPI.testRequest(code: "021").customResult(model: TestUserResponseModel<TestModel>.self) { res, message, model in
+            print(model?.data?.copyModel()?.headLine?.first?.showName);
         }
     }
 
