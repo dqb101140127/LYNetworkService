@@ -13,8 +13,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        testRequest1();
-        testRequest2();
+        testRequest1();
+//        testRequest2();
     }
     
     func testRequest1() {
@@ -23,8 +23,8 @@ class ViewController: UIViewController {
 //        }
         
         PublicAPI.testRequest(code: "021").result(model: TestModel.self) { responseModel in
-            print(responseModel.status);
-            
+            print(responseModel.model);
+
         }
     }
     

@@ -11,8 +11,18 @@ import LYNetworkService
 import HandyJSON
 
 
-struct TestModel: ModelJSON,HandyJSON {
+
+struct BrandModel:ModelJSON {
+    var brandName:String?;
+    var brandId:Int?;
+    var brandIcon:String?;
+
+}
+
+struct TestModel: ModelJSON {
     var headLine:[HeadLine]?;
+    var brandList:[BrandModel]?
+    
     
 }
 
@@ -22,3 +32,5 @@ struct HeadLine:ModelJSON,HandyJSON{
     var showName:String?
     
 }
+
+

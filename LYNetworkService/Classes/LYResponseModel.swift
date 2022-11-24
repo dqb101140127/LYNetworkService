@@ -55,3 +55,33 @@ public class LYResponseModel<T:HandyJSON>:HandyJSON {
         return responseModel;
     }
 }
+
+public class ResponseInfoModel<T:ModelJSON> {
+    public var result : Bool = false;
+    public var status:Int?;
+    public var errorCode : String?
+    public var errorMessage : String?
+    public var data : Data?;//原始数据
+    public var jsonData : JSON?;//原始数据
+    public var error:LYError?;
+    public var model : T?;
+    public var models:[T]?;
+    
+    public required init() {}
+    class func makeErrorResponseModel(errorMessage:String?,error:LYError?) -> ResponseInfoModel<T> {
+        let responseModel = ResponseInfoModel<T>();
+        responseModel.result = false;
+        responseModel.errorMessage = errorMessage;
+        responseModel.error = error;
+        return responseModel;
+    }
+}
+
+class ResponseArrayConvertModel<T:ModelJSON>: ModelJSON {
+    var models:[T]?;
+}
+
+class ResponseDictionaryConvertModel<T:ModelJSON>: ModelJSON {
+    var model:T?;
+}
+

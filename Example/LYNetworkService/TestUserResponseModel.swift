@@ -21,5 +21,7 @@ struct TestUserResponseModel<T:ModelJSON>: ModelJSON {
         case errorCode
         case data
     }
+    
+
 
 }
