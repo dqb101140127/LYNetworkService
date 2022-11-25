@@ -23,15 +23,15 @@ class ViewController: UIViewController {
 //        }
         
         PublicAPI.testRequest(code: "021").result(model: TestModel.self) { responseModel in
-            print(responseModel.model);
+            print(responseModel.model?.toJson());
 
         }
     }
     
     func testRequest2() {
-        PublicAPI.testRequest(code: "021").customResult(model: TestUserResponseModel<TestModel>.self) { res, message, model in
-            print(model?.data?.copyModel()?.headLine?.first?.showName);
-        }
+//        PublicAPI.testRequest(code: "021").customResult(model: TestUserResponseModel<TestModel>.self) { res, message, model in
+//            print(model?.data?.copyModel()?.headLine?.first?.showName);
+//        }
     }
 
     override func didReceiveMemoryWarning() {

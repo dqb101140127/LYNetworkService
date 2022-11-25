@@ -17,18 +17,24 @@ DEPENDENCIES:
   - FBSnapshotTestCase (~> 2.1.4)
   - HandyJSON
   - LYNetworkService (from `../`)
-  - SwiftyJSON
+  - SwiftyJSON (from `https://github.com/dqb101140127/SwiftyJSON.git`)
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - FBSnapshotTestCase
     - HandyJSON
-    - SwiftyJSON
 
 EXTERNAL SOURCES:
   LYNetworkService:
     :path: "../"
+  SwiftyJSON:
+    :git: https://github.com/dqb101140127/SwiftyJSON.git
+
+CHECKOUT OPTIONS:
+  SwiftyJSON:
+    :commit: af1f7a2007d607fbe735c445f19080df4260fe8e
+    :git: https://github.com/dqb101140127/SwiftyJSON.git
 
 SPEC CHECKSUMS:
   Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
@@ -37,6 +43,6 @@ SPEC CHECKSUMS:
   LYNetworkService: 8cee07adfffb228d8eb97f2be858bb6ef564426a
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 228224c6ed3c04136cc7d03e448c7fa7ebe5baa3
+PODFILE CHECKSUM: 15c3dc25cce771dc2ae0fa445c4cb6ed682cfbeb
 
 COCOAPODS: 1.11.3

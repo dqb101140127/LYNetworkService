@@ -32,7 +32,7 @@ extension NetworkServiceTarget {
     public func result<M:ModelJSON>(model:M.Type,
                                parameters:[String:Any]? = nil,
                                  _ result:@escaping (_ responseModel:ResponseInfoModel<M>)->()) {
-        NetworkService.share.requestDataModel(self,parameters: parameters, model: model, result: result);
+        NetworkService.share.requestDataAndConvertToModel(self,parameters: parameters, model: model, result: result);
     }
     // MARK: 返回自定义模型
     public func customResult<M:ModelJSON>(model:M.Type,

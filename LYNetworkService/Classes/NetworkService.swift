@@ -52,7 +52,7 @@ public class NetworkService:BaseNetworkService {
        })
     }
     
-    public func requestDataModel<T:NetworkServiceTarget,M:ModelJSON>( _ target:T,
+    public func requestDataAndConvertToModel<T:NetworkServiceTarget,M:ModelJSON>( _ target:T,
                                                                     parameters:[String:Any]? = nil,
                                                                          model:M.Type,
                                                                         result:@escaping (ResponseInfoModel<M>)->()) {

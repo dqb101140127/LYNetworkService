@@ -1,5 +1,7 @@
 
 import HandyJSON
+import SwiftyJSON
+
 public protocol LYCompatible {}
 public struct LY<Base> {
     public var base:Base;
@@ -26,6 +28,7 @@ extension LYCompatible {
 
 public protocol ModelJSON:Codable{
     func copyModel() -> Self?;
+    func toJson() -> [String: Any]?;
 }
 
 extension String:HandyJSON{}
@@ -39,6 +42,14 @@ extension ModelJSON {
         if let data = try? enCoder.encode(self) {
             let model = try? JSONDecoder().decode(Self.self, from: data);
             return model;
+        }
+        return nil;
+    }
+    public func toJson() -> [String: Any]?{
+        let enCoder = JSONEncoder();
+        if let data = try? enCoder.encode(self) {
+            let result = try? JSON(data: data);
+            return result?.dictionaryObject;
         }
         return nil;
     }

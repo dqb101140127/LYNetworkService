@@ -8,7 +8,7 @@ target 'LYNetworkService_Example' do
 
     pod 'FBSnapshotTestCase' , '~> 2.1.4'
     pod 'Alamofire'
-    pod 'SwiftyJSON'
+    pod 'SwiftyJSON' , :git => "https://github.com/dqb101140127/SwiftyJSON.git"
     pod 'HandyJSON'
   end
 #  target 'Extension' do
