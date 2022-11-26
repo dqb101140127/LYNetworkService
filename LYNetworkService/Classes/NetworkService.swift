@@ -14,6 +14,14 @@ import Alamofire
 
 public class NetworkService:BaseNetworkService {
     public static let share:NetworkService = NetworkService();
+    public lazy var jsonDecoder: JSONDecoder = {
+        let decoder = JSONDecoder();
+        let dateFormatter = DateFormatter();
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss";
+        decoder.dateDecodingStrategy = .formatted(dateFormatter)
+        return decoder;
+    }()
+    
     //MARK 返回指定的响应模型
     public func requestDataModel<T:NetworkServiceTarget,M:HandyJSON>( _ target:T,
                                                                     parameters:[String:Any]? = nil,
@@ -56,7 +64,7 @@ public class NetworkService:BaseNetworkService {
                                                                     parameters:[String:Any]? = nil,
                                                                          model:M.Type,
                                                                         result:@escaping (ResponseInfoModel<M>)->()) {
-       makeRequest(target,parameters: parameters, result: { (data) in
+       makeRequest(target,parameters: parameters, result: { [weak self](data) in
            let res = NetworkService.dataConvertToJson(target:target,data: data, fail: nil);
            if (res.1 != nil) {
                let responseModel = ResponseInfoModel<M>.makeErrorResponseModel(errorMessage: res.1, error: nil);
@@ -76,12 +84,12 @@ public class NetworkService:BaseNetworkService {
                    var temp = [String:Any]();
                    temp.updateValue(jsonData.arrayObject ?? [], forKey: "models");
                    if let tempData = try? JSONSerialization.data(withJSONObject: temp) {
-                       let convertModel = try? JSONDecoder().decode(ResponseArrayConvertModel<M>.self, from: tempData);
+                       let convertModel = try? self?.jsonDecoder.decode(ResponseArrayConvertModel<M>.self, from: tempData);
                        responseModel.models = convertModel?.models;
                    }
                }else if jsonData.object is [String:Any]{
                    if  let tempData = try? jsonData.rawData() {
-                       let convertModel = try? JSONDecoder().decode(M.self, from: tempData);
+                       let convertModel = try? self?.jsonDecoder.decode(M.self, from: tempData);
                        responseModel.model = convertModel;
                    }
                }else if jsonData.object is String {
@@ -104,14 +112,14 @@ public class NetworkService:BaseNetworkService {
                                                                              parameters:[String:Any]? = nil,
                                                                                   model:M.Type,
                                                                                  result:@escaping (Bool,String?,M?)->()) {
-       makeRequest(target,parameters: parameters,result: { (data) in
+       makeRequest(target,parameters: parameters,result: { [weak self](data) in
            do {
                let json = try JSON.init(data: data, options: .fragmentsAllowed);
                if target.enableLog(path: target.path) {
                    LYLog("=请求路径===\(target.path)==数据返回=",json);
                }
                target.didReceiveData(path: target.path, error: nil, data: data, json: json);
-               let model = try JSONDecoder().decode(model, from: data);
+               let model = try self?.jsonDecoder.decode(model, from: data);
                result(true, nil, model);
            }catch let error{
                LYLog(error)
