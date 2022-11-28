@@ -29,13 +29,13 @@ extension NetworkServiceTarget {
         NetworkService.share.requestDataModel(self,parameters: parameters, model: model, result: result);
     }
     //MARK 返回指定的响应模型
-    public func result<M:ModelJSON>(model:M.Type,
+    public func result<M:Decodable>(model:M.Type,
                                parameters:[String:Any]? = nil,
                                  _ result:@escaping (_ responseModel:ResponseInfoModel<M>)->()) {
         NetworkService.share.requestDataAndConvertToModel(self,parameters: parameters, model: model, result: result);
     }
     // MARK: 返回自定义模型
-    public func customResult<M:ModelJSON>(model:M.Type,
+    public func customResult<M:Decodable>(model:M.Type,
                                      parameters:[String:Any]? = nil,
                                        _ result:@escaping (_ res:Bool,_ message:String?,_ model:M?)->()) {
         NetworkService.share.requestCustomDataModel(self,parameters: parameters, model: model, result: result);

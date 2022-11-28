@@ -60,7 +60,7 @@ public class NetworkService:BaseNetworkService {
        })
     }
     
-    public func requestDataAndConvertToModel<T:NetworkServiceTarget,M:ModelJSON>( _ target:T,
+    public func requestDataAndConvertToModel<T:NetworkServiceTarget,M:Decodable>( _ target:T,
                                                                     parameters:[String:Any]? = nil,
                                                                          model:M.Type,
                                                                         result:@escaping (ResponseInfoModel<M>)->()) {
@@ -108,7 +108,7 @@ public class NetworkService:BaseNetworkService {
     
     
     //MARK 返回自定义数据模型
-   public func requestCustomDataModel<T:BaseNetworkServiceTarget,M:ModelJSON>( _ target:T,
+   public func requestCustomDataModel<T:BaseNetworkServiceTarget,M:Decodable>( _ target:T,
                                                                              parameters:[String:Any]? = nil,
                                                                                   model:M.Type,
                                                                                  result:@escaping (Bool,String?,M?)->()) {

@@ -53,7 +53,10 @@ extension ModelJSON {
         }
         return nil;
     }
+    
+    
 }
+
 
 //let currentScreenHeight = UIScreen.main.bounds.height
 ///// 屏幕高度
