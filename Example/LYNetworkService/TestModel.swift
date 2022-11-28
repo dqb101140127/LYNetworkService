@@ -12,7 +12,7 @@ import HandyJSON
 
 
 
-class BrandModel:ModelJSON {
+class BrandModel:Codable {
     var brandName:String?;
     var brandId:Int?;
     var brandIcon:String?;

@@ -56,7 +56,7 @@ public class LYResponseModel<T:HandyJSON>:HandyJSON {
     }
 }
 
-public class ResponseInfoModel<T:ModelJSON> {
+public class ResponseInfoModel<T:Decodable> {
     public var result : Bool = false;
     public var status:Int?;
     public var errorCode : String?
@@ -77,11 +77,11 @@ public class ResponseInfoModel<T:ModelJSON> {
     }
 }
 
-class ResponseArrayConvertModel<T:ModelJSON>: ModelJSON {
+class ResponseArrayConvertModel<T:Decodable>: Decodable {
     var models:[T]?;
 }
 
-class ResponseDictionaryConvertModel<T:ModelJSON>: ModelJSON {
+class ResponseDictionaryConvertModel<T:Decodable>: Decodable {
     var model:T?;
 }
 
