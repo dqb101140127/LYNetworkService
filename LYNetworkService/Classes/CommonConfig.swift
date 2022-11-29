@@ -57,6 +57,12 @@ extension ModelJSON {
     
 }
 
+public extension Collection where Iterator.Element: ModelJSON {
+    func toJSON() -> [[String: Any]?] {
+        return self.map{ $0.toJson() }
+    }
+}
+
 
 //let currentScreenHeight = UIScreen.main.bounds.height
 ///// 屏幕高度

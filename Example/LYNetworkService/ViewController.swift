@@ -23,7 +23,7 @@ class ViewController: UIViewController {
 //        }
         
         PublicAPI.testRequest(code: "021").result(model: TestModel.self) { responseModel in
-            print(responseModel.model);
+            print(responseModel.model?.toJson());
 
         }
     }
