@@ -83,14 +83,20 @@ public class NetworkService:BaseNetworkService {
                if jsonData.object is [Any] {
                    var temp = [String:Any]();
                    temp.updateValue(jsonData.arrayObject ?? [], forKey: "models");
-                   if let tempData = try? JSONSerialization.data(withJSONObject: temp) {
-                       let convertModel = try? self?.jsonDecoder.decode(ResponseArrayConvertModel<M>.self, from: tempData);
+                   do {
+                       let tempData = try JSONSerialization.data(withJSONObject: temp)
+                       let convertModel = try self?.jsonDecoder.decode(ResponseArrayConvertModel<M>.self, from: tempData);
                        responseModel.models = convertModel?.models;
+                   } catch let e {
+                       LYLog(e);
                    }
                }else if jsonData.object is [String:Any]{
-                   if  let tempData = try? jsonData.rawData() {
-                       let convertModel = try? self?.jsonDecoder.decode(M.self, from: tempData);
+                   do {
+                       let tempData = try jsonData.rawData()
+                       let convertModel = try self?.jsonDecoder.decode(M.self, from: tempData);
                        responseModel.model = convertModel;
+                   } catch let e {
+                       LYLog(e);
                    }
                }else if jsonData.object is String {
                    responseModel.model = jsonData.stringValue as? M
