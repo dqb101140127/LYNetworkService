@@ -267,7 +267,7 @@ extension LYError {
                 switch urlError.code
                 {
                 case .networkConnectionLost:
-                    msg = "未能连接到服务器";
+                    msg = "网络异常";
                 case .cannotConnectToHost:
                     msg = "未能连接到服务器";
                 case .timedOut:

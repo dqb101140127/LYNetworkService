@@ -13,6 +13,7 @@
 		044973538553B114516678D144E318CA /* Serializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCB787122537804865FFB9745C16C07 /* Serializer.swift */; };
 		045DE6EBF9B2F63F60F5BE60C1198E06 /* RedirectHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62D078928CF50812C97A9FA59D910B83 /* RedirectHandler.swift */; };
 		04A896288CE3A59B530250337A5F8362 /* Result+Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0605CDDB6AAE0F70CCEB46A750789A9 /* Result+Alamofire.swift */; };
+		0C605E832936F8970073D0D7 /* LYDecimalNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C605E822936F8970073D0D7 /* LYDecimalNumber.swift */; };
 		0F4037DBF307AC8058BD0A3D35C7E7E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 644862841A5ED7FF63F5F7CE652F61C3 /* Foundation.framework */; };
 		0F4D0B7B522466B970AA826F57343EFF /* DataTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB80AF4CE8DDA69716AAF71CF304660 /* DataTransform.swift */; };
 		123E6BAD784E74477DC5B5CFF0272759 /* AnyExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E6DE3D085B2A5A3707B7C9B31F25AE /* AnyExtensions.swift */; };
@@ -226,6 +227,7 @@
 		00E5A609CBF7E662B0B9C5485C2D65F0 /* UIApplication+StrictKeyWindow.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIApplication+StrictKeyWindow.m"; path = "FBSnapshotTestCase/Categories/UIApplication+StrictKeyWindow.m"; sourceTree = "<group>"; };
 		02F35F048232983AEB82E5DB92628701 /* HandyJSON.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HandyJSON.h; path = Source/HandyJSON.h; sourceTree = "<group>"; };
 		06AD4A1ACFA5FF58E1DB6AE231FAF012 /* DispatchQueue+Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "DispatchQueue+Alamofire.swift"; path = "Source/DispatchQueue+Alamofire.swift"; sourceTree = "<group>"; };
+		0C605E822936F8970073D0D7 /* LYDecimalNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LYDecimalNumber.swift; sourceTree = "<group>"; };
 		0D31CBDEB20AACD2DABEDF967AA07117 /* Pods-LYNetworkService_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LYNetworkService_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		0E101399275DB6F0DFDD4AA7752FAADD /* PointerType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PointerType.swift; path = Source/PointerType.swift; sourceTree = "<group>"; };
 		0EB80AF4CE8DDA69716AAF71CF304660 /* DataTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DataTransform.swift; path = Source/DataTransform.swift; sourceTree = "<group>"; };
@@ -234,7 +236,7 @@
 		101B1F90F10D77615C365A6F2858AF67 /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
 		11C35A12F2AEE193B8478A3BC7BBBD78 /* CachedResponseHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CachedResponseHandler.swift; path = Source/CachedResponseHandler.swift; sourceTree = "<group>"; };
 		130CCA8E804F87D7309975BE4BDE34B0 /* MultipartFormData.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartFormData.swift; path = Source/MultipartFormData.swift; sourceTree = "<group>"; };
-		13D70D712FA21455D8DD9AC0F68C1513 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		13D70D712FA21455D8DD9AC0F68C1513 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		14044912FB01F3EF2817AE99FF9A00FB /* FBSnapshotTestCase.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FBSnapshotTestCase.debug.xcconfig; sourceTree = "<group>"; };
 		14234131133C15C7472E215576591D06 /* Pods-LYNetworkService_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-LYNetworkService_Tests.modulemap"; sourceTree = "<group>"; };
 		16FAC54396AD19FC8895F7C0554E3D3D /* Alamofire.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Alamofire.debug.xcconfig; sourceTree = "<group>"; };
@@ -252,7 +254,7 @@
 		2C0D1F37C8785F7849F195AFDAFAA523 /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ParameterEncoding.swift; path = Source/ParameterEncoding.swift; sourceTree = "<group>"; };
 		2C5B11625751ED9D81ABC65D8A8A16DA /* AFError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AFError.swift; path = Source/AFError.swift; sourceTree = "<group>"; };
 		2C706756CEC5C2B9D886352361908091 /* Pods-LYNetworkService_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LYNetworkService_Example.release.xcconfig"; sourceTree = "<group>"; };
-		2E2FC6E35C330F79CA792F2A8D22D368 /* LYNetworkService.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = LYNetworkService.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		2E2FC6E35C330F79CA792F2A8D22D368 /* LYNetworkService.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = LYNetworkService.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		2F9229D29D9648FB996D77B1AB9EB3EC /* LYNetworkService-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LYNetworkService-prefix.pch"; sourceTree = "<group>"; };
 		30FE60E92BBAE7FEB52D0F2A18A31699 /* CommonConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CommonConfig.swift; path = LYNetworkService/Classes/CommonConfig.swift; sourceTree = "<group>"; };
 		31365235056DB6246EF55E5A0DCEBAB0 /* SwiftyJSON-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftyJSON-Info.plist"; sourceTree = "<group>"; };
@@ -325,7 +327,7 @@
 		999DB5657E4DE3DBBCC87E73EC0C9B7D /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
 		9AE0FC26F60B0A0E8496A757B14E59BC /* FBSnapshotTestCase-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FBSnapshotTestCase-Info.plist"; sourceTree = "<group>"; };
 		9B7543BFE3B8FCE2054300597DF9C2A4 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NetworkReachabilityManager.swift; path = Source/NetworkReachabilityManager.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E41BDE210D8764A099EB9FB3C798D69 /* Alamofire.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Alamofire.swift; path = Source/Alamofire.swift; sourceTree = "<group>"; };
 		A059BAA15FC58D0BA2C7041E3A6C82C1 /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON/SwiftyJSON.swift; sourceTree = "<group>"; };
 		A1EEC8273D5B99C692F8EE2AB0EB13C2 /* Pods-LYNetworkService_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LYNetworkService_Tests.release.xcconfig"; sourceTree = "<group>"; };
@@ -337,7 +339,7 @@
 		AFCAC0CE30113C5F2208C6328682675F /* HandyJSON.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HandyJSON.debug.xcconfig; sourceTree = "<group>"; };
 		B24F9E9C967C51E49CBD5AD5B3F46CB4 /* Concurrency.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Concurrency.swift; path = Source/Concurrency.swift; sourceTree = "<group>"; };
 		B3749F53097C4D3E8A7EA496719543EE /* UIApplication+StrictKeyWindow.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIApplication+StrictKeyWindow.h"; path = "FBSnapshotTestCase/Categories/UIApplication+StrictKeyWindow.h"; sourceTree = "<group>"; };
-		B4FF27FEF82C1CD2AF135AC838474708 /* README.en.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.en.md; sourceTree = "<group>"; };
+		B4FF27FEF82C1CD2AF135AC838474708 /* README.en.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.en.md; sourceTree = "<group>"; };
 		B56661E4B84331AA5BC31B40D6C7EAAB /* TransformOf.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TransformOf.swift; path = Source/TransformOf.swift; sourceTree = "<group>"; };
 		B672E1A8C0B89331A4207BBA51693255 /* Transformable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Transformable.swift; path = Source/Transformable.swift; sourceTree = "<group>"; };
 		B721917FDEFD4BDF6054D841760261C7 /* DateTransform.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DateTransform.swift; path = Source/DateTransform.swift; sourceTree = "<group>"; };
@@ -530,7 +532,6 @@
 				40A2E6F83163DC2A114A98D1E1124866 /* Validation.swift */,
 				A53ED2C13D8E82FB30F09147B49B61C1 /* Support Files */,
 			);
-			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
@@ -575,7 +576,6 @@
 				3D18D72CF8D788CBD595251D82260575 /* URLTransform.swift */,
 				4E5E90F62CD0B185B3D5A0EE393AB45C /* Support Files */,
 			);
-			name = HandyJSON;
 			path = HandyJSON;
 			sourceTree = "<group>";
 		};
@@ -642,7 +642,6 @@
 				E7376308DB6ACC3CF7F8CF7D5963E370 /* Support Files */,
 				6B099F15A48BBF39D6C71F3DA8A0AA19 /* SwiftSupport */,
 			);
-			name = FBSnapshotTestCase;
 			path = FBSnapshotTestCase;
 			sourceTree = "<group>";
 		};
@@ -761,7 +760,6 @@
 				A059BAA15FC58D0BA2C7041E3A6C82C1 /* SwiftyJSON.swift */,
 				EF1F3DB022F977A9AACEC52AD2EF32FF /* Support Files */,
 			);
-			name = SwiftyJSON;
 			path = SwiftyJSON;
 			sourceTree = "<group>";
 		};
@@ -798,6 +796,7 @@
 		F8B422AB491133BB96ECC6CF6465F001 /* LYNetworkService */ = {
 			isa = PBXGroup;
 			children = (
+				0C605E822936F8970073D0D7 /* LYDecimalNumber.swift */,
 				DFF0B24C7221E85FB7ADE0BB2DE82B2C /* BaseNetworkService.swift */,
 				30FE60E92BBAE7FEB52D0F2A18A31699 /* CommonConfig.swift */,
 				36A5934B05DF6517396A110C9D0867D0 /* LYResponseModel.swift */,
@@ -1209,6 +1208,7 @@
 				34E29E2462161F17DF456196D100F1A4 /* LYResponseModel.swift in Sources */,
 				135681C1DE41C8F74FC95B0B2ECA8FF1 /* NetworkService.swift in Sources */,
 				97270F00A2494D4AF4CC91D0CF24CE1C /* NetworkServiceTarget.swift in Sources */,
+				0C605E832936F8970073D0D7 /* LYDecimalNumber.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1639,8 +1639,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};

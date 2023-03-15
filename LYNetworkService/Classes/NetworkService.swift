@@ -18,6 +18,7 @@ public class NetworkService:BaseNetworkService {
         let decoder = JSONDecoder();
         let dateFormatter = DateFormatter();
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss";
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
         decoder.dateDecodingStrategy = .formatted(dateFormatter)
         return decoder;
     }()
@@ -85,6 +86,7 @@ public class NetworkService:BaseNetworkService {
                    temp.updateValue(jsonData.arrayObject ?? [], forKey: "models");
                    do {
                        let tempData = try JSONSerialization.data(withJSONObject: temp)
+                       
                        let convertModel = try self?.jsonDecoder.decode(ResponseArrayConvertModel<M>.self, from: tempData);
                        responseModel.models = convertModel?.models;
                    } catch let e {
