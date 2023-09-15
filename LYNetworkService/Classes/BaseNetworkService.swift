@@ -106,16 +106,16 @@ public class BaseNetworkService: NSObject {
     }
 
     public func request(urlString:String,
-                             parameters:[String:Any]?,
-                                 method:HTTPMethod = .post,
-                                 header:[String:String]? = nil,
-                               encoding:ParameterEncoding? = nil,
-                                cookies:[HTTPCookie]? = nil,
-                           jsonEncoding:Bool = true,
-                              enableLog:Bool = true,
-                  allowDuplicateRequest:Bool = false,
-                                 result:@escaping SuccessClosure,
-                                   fail:@escaping FailureClosure) {
+                       parameters:[String:Any]?,
+                           method:HTTPMethod = .post,
+                           header:[String:String]? = nil,
+                         encoding:ParameterEncoding? = nil,
+                          cookies:[HTTPCookie]? = nil,
+                     jsonEncoding:Bool = true,
+                        enableLog:Bool = true,
+            allowDuplicateRequest:Bool = false,
+                           result:@escaping SuccessClosure,
+                             fail:@escaping FailureClosure) {
         guard let url : URL = URL.init(string: urlString) else {return};
         if let _ = dataRequests[urlString], !allowDuplicateRequest {
             fail("努力加载中...",nil);

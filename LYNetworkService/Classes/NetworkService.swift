@@ -86,7 +86,6 @@ public class NetworkService:BaseNetworkService {
                    temp.updateValue(jsonData.arrayObject ?? [], forKey: "models");
                    do {
                        let tempData = try JSONSerialization.data(withJSONObject: temp)
-                       
                        let convertModel = try self?.jsonDecoder.decode(ResponseArrayConvertModel<M>.self, from: tempData);
                        responseModel.models = convertModel?.models;
                    } catch let e {

@@ -26,6 +26,17 @@ extension NetworkServiceTarget {
     var bodyKey: String {
         return "data";
     }
+    
+    public func headers(path: String) -> [String : String]? {
+        return nil;
+    }
+    
+    public func cookies(url: URL) -> [HTTPCookie]? {
+        return nil;
+    }
+    public func didReceiveData(path: String, error: LYError?, data: Data, json: JSON?) {
+        
+    }
 }
 
 enum PublicAPI {
