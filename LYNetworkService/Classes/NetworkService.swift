@@ -11,6 +11,13 @@ import HandyJSON
 import SwiftyJSON
 import Alamofire
 
+fileprivate func jsonDecoderErrorHandler(error:Error) {
+    LYLog(error);
+#if DEBUG
+    fatalError(error.localizedDescription);
+#else
+#endif
+ }
 
 public class NetworkService:BaseNetworkService {
     public static let share:NetworkService = NetworkService();
@@ -89,7 +96,7 @@ public class NetworkService:BaseNetworkService {
                        let convertModel = try self?.jsonDecoder.decode(ResponseArrayConvertModel<M>.self, from: tempData);
                        responseModel.models = convertModel?.models;
                    } catch let e {
-                       LYLog(e);
+                       jsonDecoderErrorHandler(error: e);
                    }
                }else if jsonData.object is [String:Any]{
                    do {
@@ -97,7 +104,7 @@ public class NetworkService:BaseNetworkService {
                        let convertModel = try self?.jsonDecoder.decode(M.self, from: tempData);
                        responseModel.model = convertModel;
                    } catch let e {
-                       LYLog(e);
+                       jsonDecoderErrorHandler(error: e);
                    }
                }else if jsonData.object is String {
                    responseModel.model = jsonData.stringValue as? M
@@ -112,6 +119,8 @@ public class NetworkService:BaseNetworkService {
            result(ResponseInfoModel<M>.makeErrorResponseModel(errorMessage: message,error: error));
        })
     }
+    
+
     
     
     //MARK 返回自定义数据模型
