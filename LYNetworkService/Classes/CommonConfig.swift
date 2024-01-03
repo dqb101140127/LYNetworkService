@@ -74,7 +74,7 @@ public extension Collection where Iterator.Element: ModelJSON {
 //let libraryPaths : String = NSSearchPathForDirectoriesInDomains(.libraryDirectory,.userDomainMask,true).first ?? ""
 //let cachePath : String = NSSearchPathForDirectoriesInDomains(.cachesDirectory,.userDomainMask,true).first ?? ""
 
-func LYLog(_ log: Any?..., fileName: String = #file, methodName: String =   #function, lineNumber: Int = #line) {
+public func LYLog(_ log: Any?..., fileName: String = #file, methodName: String =   #function, lineNumber: Int = #line) {
     //        print(#file)    //获取当前print所在的文件路径
     //        print(#function)    //获取当前print所在的方法名称
     //        print(#line)    //获取当前print所在的行数

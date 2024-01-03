@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (5.6.4)
+  - Alamofire (5.8.1)
   - FBSnapshotTestCase (2.1.4):
     - FBSnapshotTestCase/SwiftSupport (= 2.1.4)
   - FBSnapshotTestCase/Core (2.1.4)
@@ -37,7 +37,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/dqb101140127/SwiftyJSON.git
 
 SPEC CHECKSUMS:
-  Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
+  Alamofire: 3ca42e259043ee0dc5c0cdd76c4bc568b8e42af7
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
   HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
   LYNetworkService: 8cee07adfffb228d8eb97f2be858bb6ef564426a
@@ -45,4 +45,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 15c3dc25cce771dc2ae0fa445c4cb6ed682cfbeb
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.13.0

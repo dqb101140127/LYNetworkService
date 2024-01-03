@@ -27,7 +27,6 @@ public enum LYNetworkStatus : Int {
 public protocol BaseNetworkServiceTarget {
     var baseURL:String {get}
     var path : String {get}
-//    var parameters:[String:Any]? {get}
     var isJsonEncoding:Bool {get}
     func parameters() -> [String:Any]?;
     func parameterEncoding(path:String) -> ParameterEncoding;
@@ -72,6 +71,12 @@ public extension BaseNetworkServiceTarget {
     }
 }
 
+public struct LYResponse {
+    var success:Bool;
+    var data:Data?;
+    var msg:String?;
+    var error:LYError?;
+}
 
 private var dataRequests = [String:DataRequest]();
 public class BaseNetworkService: NSObject {
@@ -87,14 +92,14 @@ public class BaseNetworkService: NSObject {
         return cookie;
     }
     
-  
-    public func makeRequest<T:BaseNetworkServiceTarget>(_ target:T,
-                                                      parameters:[String:Any]? = nil,
-                                                          result:@escaping SuccessClosure,
-                                                            fail:@escaping FailureClosure) {
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    public func makeAwaitRequest<T:BaseNetworkServiceTarget>(_ target:T,
+                                                      parameters:[String:Any]? = nil) async -> LYResponse {
         let path = target.path;
         let urlString = target.baseURL + path;
-        guard let url : URL = URL.init(string: urlString) else {return}
+        guard let url : URL = URL.init(string: urlString) else {
+            return LYResponse(success: false,msg: "请求地址不合法");
+        }
         let allowDuplicateRequest = target.allowDuplicateRequest(path: path);
         let customHeader = target.headers(path: path)
         let cookies = target.cookies(url: url)
@@ -102,39 +107,55 @@ public class BaseNetworkService: NSObject {
         let method = target.method(path: path);
         let encoding = target.parameterEncoding(path: path);
         let para = parameters ?? target.parameters();
-        request(urlString: urlString, parameters: para, method: method, header: customHeader, encoding: encoding, cookies: cookies, enableLog: enableLog, allowDuplicateRequest: allowDuplicateRequest, result: result, fail: fail);
+        
+        if let _ = dataRequests[urlString], !allowDuplicateRequest {
+            return LYResponse(success: false,msg: "努力加载中...");
+        }
+        let headers = BaseNetworkService.makeHttpHeaders(userHeaders: customHeader);
+        BaseNetworkService.addCookies(cookies: cookies);
+        if enableLog {
+            let para = JSON(parameters ?? "");
+            LYLog("=请求地址===\(urlString)==请求参数=",para);
+        }
+        let request = sessionManager.request(url, method:method, parameters: para, encoding:encoding, headers: headers)
+        if !allowDuplicateRequest {
+            dataRequests.updateValue(request, forKey: urlString);
+        }
+        let response = await request.serializingData(automaticallyCancelling: true).response;
+        dataRequests.removeValue(forKey: urlString);
+        switch response.result {
+        case .success(let data):
+            return LYResponse(success: true,data: data);
+        case .failure(let error):
+            return LYResponse(success: false,msg: error.errorMsg,error: error);
+        }
     }
-
-    public func request(urlString:String,
-                       parameters:[String:Any]?,
-                           method:HTTPMethod = .post,
-                           header:[String:String]? = nil,
-                         encoding:ParameterEncoding? = nil,
-                          cookies:[HTTPCookie]? = nil,
-                     jsonEncoding:Bool = true,
-                        enableLog:Bool = true,
-            allowDuplicateRequest:Bool = false,
-                           result:@escaping SuccessClosure,
-                             fail:@escaping FailureClosure) {
-        guard let url : URL = URL.init(string: urlString) else {return};
+  
+    public func makeRequest<T:BaseNetworkServiceTarget>(_ target:T,
+                                                      parameters:[String:Any]? = nil,
+                                                          result:@escaping SuccessClosure,
+                                                            fail:@escaping FailureClosure) {
+        let path = target.path;
+        let urlString = target.baseURL + path;
+        guard let url : URL = URL.init(string: urlString) else {
+            fail("请求地址异常",nil);
+            return;
+        }
+        let allowDuplicateRequest = target.allowDuplicateRequest(path: path);
+        let customHeader = target.headers(path: path)
+        let cookies = target.cookies(url: url)
+        let enableLog = target.enableLog(path: path);
+        let method = target.method(path: path);
+        let encoding = target.parameterEncoding(path: path);
+        let para = parameters ?? target.parameters();
+        
         if let _ = dataRequests[urlString], !allowDuplicateRequest {
             fail("努力加载中...",nil);
             return;
         }
-        var _encoding :ParameterEncoding;
-        if let encoding = encoding {
-            _encoding = encoding;
-        }else{
-            if method == .get {
-                _encoding = URLEncoding.default
-            }else{
-                _encoding = jsonEncoding ? JSONEncoding.default : URLEncoding.httpBody;
-            }
-        }
-
-        let headers = BaseNetworkService.makeHttpHeaders(userHeaders: header);
+        let headers = BaseNetworkService.makeHttpHeaders(userHeaders: customHeader);
         BaseNetworkService.addCookies(cookies: cookies);
-        let request = sessionManager.request(url, method:method, parameters: parameters, encoding:_encoding, headers: headers)
+        let request = sessionManager.request(url, method:method, parameters: para, encoding:encoding, headers: headers)
         if !allowDuplicateRequest {
             dataRequests.updateValue(request, forKey: urlString);
         }
@@ -153,6 +174,8 @@ public class BaseNetworkService: NSObject {
             dataRequests.removeValue(forKey: urlString);
         }
     }
+
+
     
     
     public class func addCookies(cookies:[HTTPCookie]?){

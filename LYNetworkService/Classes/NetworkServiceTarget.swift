@@ -23,6 +23,7 @@ extension NetworkServiceTarget {
     }
     
     //MARK HandyJSON 返回指定的响应模型
+    @available(*,deprecated, message: "HandyJSON作者已不再维护")
     public func result<M:HandyJSON>(model:M.Type,
                                parameters:[String:Any]? = nil,
                                  _ result:@escaping (_ responseModel:LYResponseModel<M>)->()) {
@@ -50,5 +51,12 @@ extension NetworkServiceTarget {
     public func responseJson(parameters:[String:Any]? = nil,
                                 _ result:@escaping (_ responseModel:ResponseModel)->()) {
         NetworkService.share.requestJson(self,parameters: parameters, result);
+    }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    public func awaitResult<M:ModelJSON>(model:M.Type,
+                                         parameters:[String:Any]? = nil) async -> ResponseInfoModel<M> {
+
+        return await NetworkService.share.requestDataAndConvertToModel(self, parameters: parameters, model: model);
     }
 }

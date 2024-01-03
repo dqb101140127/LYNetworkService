@@ -15,6 +15,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         testRequest1();
 //        testRequest2();
+//        if #available(iOS 13.0, *) {
+//            testRequest3()
+//        } else {
+//            // Fallback on earlier versions
+//        };
     }
     
     func testRequest1() {
@@ -23,7 +28,7 @@ class ViewController: UIViewController {
 //        }
         
         PublicAPI.testRequest(code: "021").result(model: TestModel.self) { responseModel in
-            print(responseModel.model?.toJson());
+            LYLog(responseModel.model?.toJson());
         }
     }
     
@@ -31,6 +36,15 @@ class ViewController: UIViewController {
 //        PublicAPI.testRequest(code: "021").customResult(model: TestUserResponseModel<TestModel>.self) { res, message, model in
 //            print(model?.data?.copyModel()?.headLine?.first?.showName);
 //        }
+    }
+    
+    @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+    func testRequest3() {
+       Task {
+            let result = await PublicAPI.testRequest(code: "021").awaitResult(model:  TestModel.self);
+           LYLog(result.model?.toJson());
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
