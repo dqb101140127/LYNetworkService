@@ -79,7 +79,7 @@ public class NetworkService:BaseNetworkService {
         responseModel.data = data;
         responseModel.jsonData = json;
         responseModel.result  = json?[target.resultKey].boolValue ?? false;
-        responseModel.status  = json?[target.statusKey].intValue ?? 0;
+        responseModel.status  = json?[target.statusKey].intValue;
         responseModel.errorCode = json?[target.errorCodeKey].stringValue;
         responseModel.errorMessage = json?[target.errorMessageKey].stringValue;
         if let jsonData = json?[target.bodyKey] {
@@ -149,7 +149,7 @@ public class NetworkService:BaseNetworkService {
             }else{
                 let responseModel = ResponseModel();
                 responseModel.result  = json?[target.resultKey].boolValue ?? false;
-                responseModel.status  = json?[target.statusKey].intValue ?? 0;
+                responseModel.status  = json?[target.statusKey].intValue;
                 responseModel.errorCode = json?[target.errorCodeKey].stringValue;
                 responseModel.errorMessage = json?[target.errorMessageKey].stringValue;
                 responseModel.data = data;
@@ -163,6 +163,21 @@ public class NetworkService:BaseNetworkService {
         })
      }
     
+    class func dataConvertToJson<T:BaseNetworkServiceTarget>(target:T,data:Data,fail:FailureClosure?) -> (JSON?,String?) {
+        do {
+            let json = try JSON.init(data: data, options: .fragmentsAllowed);
+            if target.enableLog(path: target.path) {
+                LYLog("=请求路径===\(target.path)==数据返回=",json);
+            }
+            target.didReceiveData(path: target.path, error: nil, data: data, json: json);
+            return (json,nil);
+        }catch let error{
+            LYLog(error)
+            target.didReceiveData(path: target.path, error: LYError.responseSerializationFailed(reason: .jsonSerializationFailed(error: error)), data: data, json: nil);
+            fail?("数据异常",nil)
+            return (nil,"数据异常");
+        }
+    }
     
     //MARK 返回指定的响应模型
     @available(*,deprecated, message: "HandyJSON作者已不再维护")
@@ -177,7 +192,7 @@ public class NetworkService:BaseNetworkService {
            responseModel?.data = data;
            responseModel?.jsonData = json;
            responseModel?.result  = json?[target.resultKey].boolValue ?? false;
-           responseModel?.status  = json?[target.statusKey].intValue ?? 0;
+           responseModel?.status  = json?[target.statusKey].intValue;
            responseModel?.errorCode = json?[target.errorCodeKey].stringValue;
            responseModel?.errorMessage = json?[target.errorMessageKey].stringValue;
            if let jsonData = json?[target.bodyKey] {
@@ -202,21 +217,4 @@ public class NetworkService:BaseNetworkService {
            result(LYResponseModel<M>.makeErrorResponseModel(errorMessage: message,error: error));
        })
     }
-
-    class func dataConvertToJson<T:BaseNetworkServiceTarget>(target:T,data:Data,fail:FailureClosure?) -> (JSON?,String?) {
-        do {
-            let json = try JSON.init(data: data, options: .fragmentsAllowed);
-            if target.enableLog(path: target.path) {
-                LYLog("=请求路径===\(target.path)==数据返回=",json);
-            }
-            target.didReceiveData(path: target.path, error: nil, data: data, json: json);
-            return (json,nil);
-        }catch let error{
-            LYLog(error)
-            target.didReceiveData(path: target.path, error: LYError.responseSerializationFailed(reason: .jsonSerializationFailed(error: error)), data: data, json: nil);
-            fail?("数据异常",nil)
-            return (nil,"数据异常");
-        }
-    }
-
 }

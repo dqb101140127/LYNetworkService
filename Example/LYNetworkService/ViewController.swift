@@ -41,7 +41,7 @@ class ViewController: UIViewController {
     @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
     func testRequest3() {
        Task {
-            let result = await PublicAPI.testRequest(code: "021").awaitResult(model:  TestModel.self);
+            let result = await PublicAPI.testRequest(code: "021").resultUseAwait(model:  TestModel.self);
            LYLog(result.model?.toJson());
         }
 
