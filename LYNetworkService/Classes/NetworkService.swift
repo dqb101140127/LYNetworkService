@@ -75,7 +75,7 @@ public class NetworkService:BaseNetworkService {
     
 
     func packageToModel<T:NetworkServiceTarget,M:Decodable>( _ target:T,                                                                         model:M.Type,json:JSON?,data:Data) -> ResponseInfoModel<M> {
-        let responseModel = ResponseInfoModel<M>();
+        var responseModel = ResponseInfoModel<M>();
         responseModel.data = data;
         responseModel.jsonData = json;
         responseModel.result  = json?[target.resultKey].boolValue ?? false;
@@ -88,17 +88,19 @@ public class NetworkService:BaseNetworkService {
                 temp.updateValue(jsonData.arrayObject ?? [], forKey: "models");
                 do {
                     let tempData = try JSONSerialization.data(withJSONObject: temp)
-                    let convertModel = try self.jsonDecoder.decode(ResponseArrayConvertModel<M>.self, from: tempData);
+                    let convertModel = try jsonDecoder.decode(ResponseArrayConvertModel<M>.self, from: tempData);
                     responseModel.models = convertModel.models;
                 } catch let e {
+                    responseModel = ResponseInfoModel<M>.makeErrorResponseModel(errorMessage: "数据解析出错", error: e.asAFError);
                     jsonDecoderErrorHandler(error: e);
                 }
             }else if jsonData.object is [String:Any]{
                 do {
                     let tempData = try jsonData.rawData()
-                    let convertModel = try self.jsonDecoder.decode(M.self, from: tempData);
+                    let convertModel = try jsonDecoder.decode(M.self, from: tempData);
                     responseModel.model = convertModel;
                 } catch let e {
+                    responseModel = ResponseInfoModel<M>.makeErrorResponseModel(errorMessage: "数据解析出错", error: e.asAFError);
                     jsonDecoderErrorHandler(error: e);
                 }
             }else if jsonData.object is String {
