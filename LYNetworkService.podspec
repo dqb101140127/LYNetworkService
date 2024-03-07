@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'LYNetworkService'
-  s.version          = '0.2.0'
+  s.version          = '1.0.1'
   s.summary          = 'A short description of LYNetworkService.'
 
 # This description is used to generate tags and improve search results.

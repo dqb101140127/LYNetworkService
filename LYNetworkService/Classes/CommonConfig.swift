@@ -34,6 +34,10 @@ public protocol ModelJSON:Codable{
 //extension NSNumber:HandyJSON {}
 //extension Bool:HandyJSON {}
 
+extension String:ModelJSON{}
+extension Double:ModelJSON {}
+extension Int:ModelJSON {}
+extension Bool:ModelJSON {}
 
 extension ModelJSON {
     public func copyModel() -> Self? {
