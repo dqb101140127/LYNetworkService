@@ -8,7 +8,6 @@
 
 import UIKit
 import LYNetworkService
-import HandyJSON
 
 
 
@@ -72,7 +71,7 @@ class TestModel: ModelJSON {
 }
 
 
-struct HeadLine:ModelJSON,HandyJSON{
+struct HeadLine:ModelJSON{
     var showId:Int?
     var showName:String?
     

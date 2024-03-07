@@ -5,17 +5,14 @@ PODS:
   - FBSnapshotTestCase/Core (2.1.4)
   - FBSnapshotTestCase/SwiftSupport (2.1.4):
     - FBSnapshotTestCase/Core
-  - HandyJSON (5.0.2)
-  - LYNetworkService (0.1.2):
+  - LYNetworkService (0.2.0):
     - Alamofire
-    - HandyJSON
     - SwiftyJSON
   - SwiftyJSON (5.0.1)
 
 DEPENDENCIES:
   - Alamofire
   - FBSnapshotTestCase (~> 2.1.4)
-  - HandyJSON
   - LYNetworkService (from `../`)
   - SwiftyJSON (from `https://github.com/dqb101140127/SwiftyJSON.git`)
 
@@ -23,7 +20,6 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - FBSnapshotTestCase
-    - HandyJSON
 
 EXTERNAL SOURCES:
   LYNetworkService:
@@ -39,10 +35,9 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 3ca42e259043ee0dc5c0cdd76c4bc568b8e42af7
   FBSnapshotTestCase: 094f9f314decbabe373b87cc339bea235a63e07a
-  HandyJSON: 9e4e236f5d2dbefad5155a77417bbea438201c03
-  LYNetworkService: 8cee07adfffb228d8eb97f2be858bb6ef564426a
+  LYNetworkService: e60dbb5ed9469e9b3358c81955312c8433997f28
   SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
 
-PODFILE CHECKSUM: 15c3dc25cce771dc2ae0fa445c4cb6ed682cfbeb
+PODFILE CHECKSUM: 5af4277bfbeffe77bda9be4c7518640e86dc982d
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.15.2

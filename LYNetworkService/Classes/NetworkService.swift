@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import HandyJSON
 import SwiftyJSON
 import Alamofire
 
@@ -181,42 +180,42 @@ public class NetworkService:BaseNetworkService {
         }
     }
     
-    //MARK 返回指定的响应模型
-    @available(*,deprecated, message: "HandyJSON作者已不再维护")
-    public func requestDataModel<T:NetworkServiceTarget,M:HandyJSON>( _ target:T,
-                                                                    parameters:[String:Any]? = nil,
-                                                                         model:M.Type,
-                                                                        result:@escaping (LYResponseModel<M>)->()) {
-       makeRequest(target,parameters: parameters, result: { (data) in
-           let res = NetworkService.dataConvertToJson(target:target,data: data, fail: nil);
-           let json = res.0;
-           let responseModel = LYResponseModel<M>.deserialize(from: json?.dictionaryObject);
-           responseModel?.data = data;
-           responseModel?.jsonData = json;
-           responseModel?.result  = json?[target.resultKey].boolValue ?? false;
-           responseModel?.status  = json?[target.statusKey].intValue;
-           responseModel?.errorCode = json?[target.errorCodeKey].stringValue;
-           responseModel?.errorMessage = json?[target.errorMessageKey].stringValue;
-           if let jsonData = json?[target.bodyKey] {
-               if jsonData.object is [Any] {
-                 let models =  jsonData.arrayObject?.compactMap({ dict in
-                     model.deserialize(from: dict as? [String :Any]);
-                 })
-                   responseModel?.models = models;
-               }else if jsonData.object is [String:Any]{
-                   let t = model.deserialize(from: jsonData.dictionaryObject);
-                   responseModel?.model = t;
-               }else if jsonData.object is String {
-                   responseModel?.model = jsonData.stringValue as? M
-               }else if jsonData.object is NSNumber{
-                   responseModel?.model = jsonData.numberValue as? M
-               }else if jsonData.object is Bool {
-                   responseModel?.model = jsonData.boolValue as? M
-               }
-           }
-           result(responseModel ?? LYResponseModel<M>.makeErrorResponseModel(errorMessage: res.1, error: nil));
-       }, fail: {  (message,error) in
-           result(LYResponseModel<M>.makeErrorResponseModel(errorMessage: message,error: error));
-       })
-    }
+//    //MARK 返回指定的响应模型
+//    @available(*,deprecated, message: "HandyJSON作者已不再维护")
+//    public func requestDataModel<T:NetworkServiceTarget,M:HandyJSON>( _ target:T,
+//                                                                    parameters:[String:Any]? = nil,
+//                                                                         model:M.Type,
+//                                                                        result:@escaping (LYResponseModel<M>)->()) {
+//       makeRequest(target,parameters: parameters, result: { (data) in
+//           let res = NetworkService.dataConvertToJson(target:target,data: data, fail: nil);
+//           let json = res.0;
+//           let responseModel = LYResponseModel<M>.deserialize(from: json?.dictionaryObject);
+//           responseModel?.data = data;
+//           responseModel?.jsonData = json;
+//           responseModel?.result  = json?[target.resultKey].boolValue ?? false;
+//           responseModel?.status  = json?[target.statusKey].intValue;
+//           responseModel?.errorCode = json?[target.errorCodeKey].stringValue;
+//           responseModel?.errorMessage = json?[target.errorMessageKey].stringValue;
+//           if let jsonData = json?[target.bodyKey] {
+//               if jsonData.object is [Any] {
+//                 let models =  jsonData.arrayObject?.compactMap({ dict in
+//                     model.deserialize(from: dict as? [String :Any]);
+//                 })
+//                   responseModel?.models = models;
+//               }else if jsonData.object is [String:Any]{
+//                   let t = model.deserialize(from: jsonData.dictionaryObject);
+//                   responseModel?.model = t;
+//               }else if jsonData.object is String {
+//                   responseModel?.model = jsonData.stringValue as? M
+//               }else if jsonData.object is NSNumber{
+//                   responseModel?.model = jsonData.numberValue as? M
+//               }else if jsonData.object is Bool {
+//                   responseModel?.model = jsonData.boolValue as? M
+//               }
+//           }
+//           result(responseModel ?? LYResponseModel<M>.makeErrorResponseModel(errorMessage: res.1, error: nil));
+//       }, fail: {  (message,error) in
+//           result(LYResponseModel<M>.makeErrorResponseModel(errorMessage: message,error: error));
+//       })
+//    }
 }

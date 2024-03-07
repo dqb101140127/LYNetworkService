@@ -4,7 +4,6 @@
 //
 //  Created by dong on 2022/2/21.
 //
-import HandyJSON
 
 public protocol NetworkServiceTarget:BaseNetworkServiceTarget {
     var resultKey:String{get}//状态字段 返回LYResponseModel->result(bool类型)
@@ -53,11 +52,11 @@ extension NetworkServiceTarget {
     }
     
     //MARK HandyJSON 返回指定的响应模型
-    @available(*,deprecated, message: "HandyJSON作者已不再维护")
-    public func result<M:HandyJSON>(model:M.Type,
-                               parameters:[String:Any]? = nil,
-                                 _ result:@escaping (_ responseModel:LYResponseModel<M>)->()) {
-        NetworkService.share.requestDataModel(self,parameters: parameters, model: model, result: result);
-    }
+//    @available(*,deprecated, message: "HandyJSON作者已不再维护")
+//    public func result<M:HandyJSON>(model:M.Type,
+//                               parameters:[String:Any]? = nil,
+//                                 _ result:@escaping (_ responseModel:LYResponseModel<M>)->()) {
+//        NetworkService.share.requestDataModel(self,parameters: parameters, model: model, result: result);
+//    }
 
 }

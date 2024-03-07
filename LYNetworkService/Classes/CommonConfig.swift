@@ -1,5 +1,4 @@
 
-import HandyJSON
 import SwiftyJSON
 
 public protocol LYCompatible {}
@@ -31,9 +30,9 @@ public protocol ModelJSON:Codable{
     func toJson() -> [String: Any]?;
 }
 
-extension String:HandyJSON{}
-extension NSNumber:HandyJSON {}
-extension Bool:HandyJSON {}
+//extension String:HandyJSON{}
+//extension NSNumber:HandyJSON {}
+//extension Bool:HandyJSON {}
 
 
 extension ModelJSON {

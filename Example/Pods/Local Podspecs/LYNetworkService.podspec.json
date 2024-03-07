@@ -1,6 +1,6 @@
 {
   "name": "LYNetworkService",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "summary": "A short description of LYNetworkService.",
   "description": "TODO: Add long description of the pod here.",
   "homepage": "https://gitee.com/dongluoyi/LYNetworkService",
@@ -13,7 +13,7 @@
   },
   "source": {
     "git": "https://gitee.com/dongluoyi/LYNetworkService.git",
-    "tag": "0.1.2"
+    "tag": "0.2.0"
   },
   "platforms": {
     "ios": "10.0"
@@ -30,9 +30,6 @@
 
     ],
     "SwiftyJSON": [
-
-    ],
-    "HandyJSON": [
 
     ]
   }
