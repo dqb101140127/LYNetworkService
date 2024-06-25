@@ -81,6 +81,9 @@ public class NetworkService:BaseNetworkService {
         responseModel.status  = json?[target.statusKey].intValue;
         responseModel.errorCode = json?[target.errorCodeKey].stringValue;
         responseModel.errorMessage = json?[target.errorMessageKey].stringValue;
+        if M.self is UnParserModel.Type {
+            return responseModel;
+        }
         if let jsonData = json?[target.bodyKey] {
             if jsonData.object is [Any] {
                 var temp = [String:Any]();

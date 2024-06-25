@@ -33,11 +33,12 @@ public protocol ModelJSON:Codable{
 //extension String:HandyJSON{}
 //extension NSNumber:HandyJSON {}
 //extension Bool:HandyJSON {}
-
+public struct UnParserModel {}
 extension String:ModelJSON{}
 extension Double:ModelJSON {}
 extension Int:ModelJSON {}
 extension Bool:ModelJSON {}
+extension UnParserModel:ModelJSON {}
 
 extension ModelJSON {
     public func copyModel() -> Self? {
